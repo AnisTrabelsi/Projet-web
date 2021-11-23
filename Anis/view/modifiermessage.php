@@ -1,12 +1,18 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require_once '../controller/messageC.php';
+require_once '../Model/message.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
-header('Location:afficherListeReclams.php');
+$messageV=new messagec();
+
+if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+
+$messageV->modifiermessage($messagesaisie);
+
+header('Location:afficherListemessages.php');
+}else 
+{
+    $a=$messageV->getmessagebyid($_GET['CINM']);
 }
 ?>
 
@@ -18,7 +24,7 @@ header('Location:afficherListeReclams.php');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+    Eco-life.tn
   </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
@@ -40,7 +46,7 @@ header('Location:afficherListeReclams.php');
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <img src="./assets/img/brand/blue.png" class="navbar-brand-img"  alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -138,13 +144,13 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="ajouterreclam.php">
+            <a class="nav-link  active " href="../examples/profile.html">
               <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="ajoutermessage.php">
-              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
+            <a class="nav-link " href="../examples/tables.html">
+              <i class="ni ni-bullet-list-67 text-red"></i> Tables
             </a>
           </li>
           <li class="nav-item">
@@ -259,50 +265,46 @@ header('Location:afficherListeReclams.php');
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(./assets/img/theme/bff.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(./assets/img/theme/bff.png); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Passer une réclamation tant que Admin </h1>
-            <p class="text-white mt-0 mb-5">Service réclamation</p>
+            <h1 class="display-2 text-white">Modifier un message tant que Admin </h1>
+            <p class="text-white mt-0 mb-5">Service Messgerie</p>
           </div>
         </div>
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--7">
+ 
+
+      <div class="container-fluid mt--7">
       
         <div class="col-xl-8 order-xl-1">
           <div class="card bg-secondary shadow">
-    
             <div class="card-body">
 
               <form method="POST" action="" >
-                <h6 class="heading-small text-muted mb-4">Réclamation</h6>
+                <h6 class="heading-small text-muted mb-4">Message</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <script src="reclamation.js"></script>
                         <label for="name" class="form-control-label">CIN:
                         </label>
-                        <input type="number" id="CIN"  class="form-control form-control-alternative" name="CIN" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv14" class="message" style='color:red'></div>
-                        <div id="msgDiv152" class="message" style='color:red'></div>
+                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CINM'];?>">
                         <br>
                       </div>
                     </div>
 
                     <div class="col-lg-6">
                       <div class="form-group">
-             <label for="name" class="form-control-label">Nom:
+             <label for="name" class="form-control-label">Date:
                    </label>
-                    <input type="text" id="Nom"   class="form-control form-control-alternative"  name="Nom" required minlenght="3" maxlength="20" size="10">
-                <div id="msgDiv1" class="message" style='color:red'></div>
-                     <div id="msgDiv12" class="message" style='color:red'></div>
+                    <input type="date" id="datee"   class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
                       </div>
                     </div>
                   </div>
@@ -310,77 +312,16 @@ header('Location:afficherListeReclams.php');
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                <label for="name" class="form-control-label">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control form-control-alternative" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
+                <label for="name" class="form-control-label">message:
+                                   </label>
+                                   <input type="text" id="messagee" class="form-control" name="messagee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['messagee'];?>">
+                                              
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Email:
-                        </label>
-                        <input type="text" id="Email" class="form-control form-control-alternative" name="Email" required minlenght="3" maxlength="20" size="10">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Numéro telephone:
-                        </label>
-                        <input type="Number" id="Num_tel" class="form-control form-control-alternative" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv2" class="message" style='color:red'></div>
-                        <div id="msgDiv22" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                    
-              <label for="Date_de_reclamation" class="form-control-label">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet2" class="form-control-label" >id service:
-                        </label>
-                        <input type="text" id="id_sujet2" name="id_sujet2" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet" class="form-control-label" >id produit:
-                        </label>
-                        <input type="text" id="id_sujet" name="id_sujet" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Description</h6>
-                <div class="pl-lg-4">
+                   
+			                	<div class="pl-lg-4">
                   <div class="form-group">
-                    <label for="Description ">Description:
-                    </label>
-                    <textarea id="Description" name="Description"  class="form-control form-control-alternative" rows="5" cols="33">
-                    </textarea>
-                  </div>
-                </div>
-				<div class="pl-lg-4">
-                  <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+				           <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
@@ -432,5 +373,3 @@ header('Location:afficherListeReclams.php');
       });
   </script>
 </body>
-
-</html>

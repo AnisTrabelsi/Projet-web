@@ -1,14 +1,21 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require_once '../controller/messageC.php';
+require_once '../Model/message.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
- //header('Location:afficherListeReclams.php');
+$messageV=new messagec();
+
+if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+
+$messageV->modifiermessage($messagesaisie);
+
+header('Location:afficherListemessagesclient.php');
+}else 
+{
+    $a=$messageV->getmessagebyid($_GET['CINM']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -319,106 +326,43 @@ $reclamcc->ajouterreclam($reclamsaisie);
   
                                           <div class="col-md-6">
                                                   <div class="form-group">
-                                                  <script src="reclamation.js"></script>
                                                   <fieldset width="2">
   
                                                       <label for="name">CIN:
                                                       </label>
-                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv14" class="message" style='color:red'></div>
-                                                      <div id="msgDiv152" class="message" style='color:red'></div>
+                                                      <input type="number" id="CINM" class="form-control" name="CINM" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CINM'];?>">
+                                                     
                                                       <br>
   
                                                   </div>
                                               </div>
   
                                               <div class="col-md-6"> 
-                                                      <label for="name">Nom:
+                                                      <label for="name">Date:
                                                       </label>
-                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv1" class="message" style='color:red'></div>
-                                                      <div id="msgDiv12" class="message" style='color:red'></div>
+                                                      <input type="date" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
+
                                               </div>
   
   
                                               <div class="col-md-6"> 
                                                   <div class="form-group">
-                                                      <label for="name">Prenom:
+                                                      <label for="name">message:
                                                       </label>
-                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
+                                                      <input type="text" id="messagee" class="form-control" name="messagee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['messagee'];?>">
+
                                                   </div>
                                               </div>
   
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Email:
-                                                      </label>
-                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10">
-                                                      
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Numéro telephone:
-                                                      </label>
-                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-  
-              <label for="Date_de_reclamation">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" name="Date_de_reclamation" class="form-control" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-              <br>
-              </div>
-                                              </div>
   
                                               
-                                      
-                                              
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet2">id service:
-                                                      </label>
-                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                                          
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet">id produit:
-                                                      </label>
-                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-              <label for="Description ">Description:
-              </label>
-              <textarea id="Description" name="Description" class="form-control" rows="5" cols="33">
-              </textarea>
-               </div>
-              </div>
               
                                                                                   
   
                                               <div class="col-md-12">
                                                   
                                               
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary"   >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
                                                       
                                               

@@ -1,12 +1,12 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require_once '../controller/messageC.php';
+require_once '../Model/message.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
-header('Location:afficherListeReclams.php');
+if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+$messagecc= new messagec();
+$messagecc->ajoutermessage($messagesaisie);
+header('Location:afficherListemessages.php');
 }
 ?>
 
@@ -138,13 +138,13 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="ajouterreclam.php">
+            <a class="nav-link   " href="ajouterreclam.php">
               <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="ajoutermessage.php">
-              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
+            <a class="nav-link active " href="ajoutermessage.php">
+              <i class="ni ni-bullet-list-67 text-red"></i> Ajouter un message
             </a>
           </li>
           <li class="nav-item">
@@ -266,8 +266,8 @@ header('Location:afficherListeReclams.php');
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Passer une réclamation tant que Admin </h1>
-            <p class="text-white mt-0 mb-5">Service réclamation</p>
+            <h1 class="display-2 text-white">envoyer un message tant que Admin </h1>
+            <p class="text-white mt-0 mb-5">Service Messagerie</p>
           </div>
         </div>
       </div>
@@ -279,30 +279,26 @@ header('Location:afficherListeReclams.php');
           <div class="card bg-secondary shadow">
     
             <div class="card-body">
-
-              <form method="POST" action="" >
+            <form method="POST" action="" >
                 <h6 class="heading-small text-muted mb-4">Réclamation</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <script src="reclamation.js"></script>
-                        <label for="name" class="form-control-label">CIN:
+                        <label for="CINM" class="form-control-label">CIN:
                         </label>
-                        <input type="number" id="CIN"  class="form-control form-control-alternative" name="CIN" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv14" class="message" style='color:red'></div>
-                        <div id="msgDiv152" class="message" style='color:red'></div>
+                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10">
+              
                         <br>
                       </div>
                     </div>
 
                     <div class="col-lg-6">
                       <div class="form-group">
-             <label for="name" class="form-control-label">Nom:
+             <label for="Date" class="form-control-label">Date:
                    </label>
-                    <input type="text" id="Nom"   class="form-control form-control-alternative"  name="Nom" required minlenght="3" maxlength="20" size="10">
-                <div id="msgDiv1" class="message" style='color:red'></div>
-                     <div id="msgDiv12" class="message" style='color:red'></div>
+                    <input type="date" id="datee"  class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10">
+            
                       </div>
                     </div>
                   </div>
@@ -310,81 +306,20 @@ header('Location:afficherListeReclams.php');
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                <label for="name" class="form-control-label">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control form-control-alternative" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
+                <label for="message" class="form-control-label">message:
+                            </label>
+                             <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="20" row="60" size="10"> </textarea>                                        
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Email:
-                        </label>
-                        <input type="text" id="Email" class="form-control form-control-alternative" name="Email" required minlenght="3" maxlength="20" size="10">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Numéro telephone:
-                        </label>
-                        <input type="Number" id="Num_tel" class="form-control form-control-alternative" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv2" class="message" style='color:red'></div>
-                        <div id="msgDiv22" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
                     
-              <label for="Date_de_reclamation" class="form-control-label">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet2" class="form-control-label" >id service:
-                        </label>
-                        <input type="text" id="id_sujet2" name="id_sujet2" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet" class="form-control-label" >id produit:
-                        </label>
-                        <input type="text" id="id_sujet" name="id_sujet" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Description</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label for="Description ">Description:
-                    </label>
-                    <textarea id="Description" name="Description"  class="form-control form-control-alternative" rows="5" cols="33">
-                    </textarea>
-                  </div>
-                </div>
 				<div class="pl-lg-4">
                   <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary"  >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
               </form>
+              
             </div>
           </div>
         </div>

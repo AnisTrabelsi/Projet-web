@@ -2,13 +2,20 @@
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
- //header('Location:afficherListeReclams.php');
+$reclamV=new reclamc();
+
+if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Descriptionn']))
+{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Descriptionn']);
+
+$reclamV->modifierreclam($reclamsaisie);
+
+header('Location:afficherListeReclamspourclient.php');
+}else 
+{
+    $a=$reclamV->getreclambyid($_GET['CIN']);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -304,7 +311,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
       <script src="reclamation.js"></script>
       <body>
           <div class="container">
-          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>
+          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>  
               <div class="row justify-content-center">
                   <div class="col-md-12">
                       <div class="wrapper">
@@ -324,7 +331,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
   
                                                       <label for="name">CIN:
                                                       </label>
-                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CIN'];?>">
                                                       <div id="msgDiv14" class="message" style='color:red'></div>
                                                       <div id="msgDiv152" class="message" style='color:red'></div>
                                                       <br>
@@ -335,7 +342,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                               <div class="col-md-6"> 
                                                       <label for="name">Nom:
                                                       </label>
-                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Nom'];?>">
                                                       <div id="msgDiv1" class="message" style='color:red'></div>
                                                       <div id="msgDiv12" class="message" style='color:red'></div>
                                               </div>
@@ -345,7 +352,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
                                                       <label for="name">Prenom:
                                                       </label>
-                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Prenom'];?>">
                                                       <div id="msgDiv2" class="message" style='color:red'></div>
                                                       <div id="msgDiv22" class="message" style='color:red'></div>
                                                   </div>
@@ -356,7 +363,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
                                                       <label for="name">Email:
                                                       </label>
-                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Email'];?>">
                                                       
                                                   </div>
                                               </div>
@@ -366,7 +373,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
                                                       <label for="name">Numéro telephone:
                                                       </label>
-                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Num_tel'];?>">
                                                       <div id="msgDiv2" class="message" style='color:red'></div>
                                                       <div id="msgDiv22" class="message" style='color:red'></div>
                                                   </div>
@@ -378,7 +385,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
               <label for="Date_de_reclamation">Date_de_reclamation:
               </label>
               <input type="date" id="Date_de_reclamation" name="Date_de_reclamation" class="form-control" required minlenght="3"
-                  maxlength="20" size="10">
+                  maxlength="20" size="10" Value="<?php echo $a['Date_de_reclamation'];?>">
               <div id="msgDiv6" class="message" style='color:red'></div>
               <br>
               </div>
@@ -391,7 +398,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
                                                       <label for="id_sujet2">id service:
                                                       </label>
-                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
+                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service"  Value="<?php echo $a['id_sujet2'];?>">
                                           
                                                   </div>
                                               </div>
@@ -400,7 +407,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
                                                       <label for="id_sujet">id produit:
                                                       </label>
-                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
+                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit" Value="<?php echo $a['id_sujet'];?>" >
                                                   </div>
                                               </div>
   
@@ -408,8 +415,8 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                                   <div class="form-group">
               <label for="Description ">Description:
               </label>
-              <textarea id="Description" name="Description" class="form-control" rows="5" cols="33">
-              </textarea>
+            
+              <input type="textarea" id="Descriptionn" name="Descriptionn"  required minlenght="3" class="form-control" maxlength="20" size="10" placeholder="Descriptionn" Value="<?php echo $a['Descriptionn'];?>" >
                </div>
               </div>
               

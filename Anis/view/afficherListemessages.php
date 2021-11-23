@@ -1,15 +1,10 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require '../controller/messageC.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
-header('Location:afficherListeReclams.php');
-}
+$messaged=new messagec();
+$messages=$messaged->affichermessage();
+ 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,20 +30,23 @@ header('Location:afficherListeReclams.php');
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+        aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <img src="./assets/img/brand/blue.png"   class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             <i class="ni ni-bell-55"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
+            aria-labelledby="navbar-default_dropdown_1">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
@@ -59,7 +57,8 @@ header('Location:afficherListeReclams.php');
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-  
+                <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg
+">
               </span>
             </div>
           </a>
@@ -102,7 +101,8 @@ header('Location:afficherListeReclams.php');
               </a>
             </div>
             <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main"
+                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
                 <span></span>
                 <span></span>
               </button>
@@ -112,7 +112,8 @@ header('Location:afficherListeReclams.php');
         <!-- Form -->
         <form class="mt-4 mb-3 d-md-none">
           <div class="input-group input-group-rounded input-group-merge">
-            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
+              aria-label="Search">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span class="fa fa-search"></span>
@@ -138,13 +139,13 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="ajouterreclam.php">
-              <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
+            <a class="nav-link " href="../examples/profile.html">
+              <i class="ni ni-single-02 text-yellow"></i> User profile
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="ajoutermessage.php">
-              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
+            <a class="nav-link  active " href="../examples/tables.html">
+              <i class="ni ni-bullet-list-67 text-red"></i> Réclamations
             </a>
           </li>
           <li class="nav-item">
@@ -157,7 +158,7 @@ header('Location:afficherListeReclams.php');
               <i class="ni ni-circle-08 text-pink"></i> Register
             </a>
           </li>
-           <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="\website\frontoffice\Colo Shop\indextry.html">
               <i class="ni ni-shop text-green"></i> Ma boutique
             </a>
@@ -175,7 +176,8 @@ header('Location:afficherListeReclams.php');
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-3">
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+            <a class="nav-link"
+              href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
               <i class="ni ni-spaceship"></i> Getting started
             </a>
           </li>
@@ -205,7 +207,7 @@ header('Location:afficherListeReclams.php');
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Admin</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Tables</a>
         <!-- Form -->
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
           <div class="form-group mb-0">
@@ -220,11 +222,15 @@ header('Location:afficherListeReclams.php');
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">
                 </span>
-               
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">Anis Trabelsi</span>
+                </div>
               </div>
             </a>
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -259,142 +265,69 @@ header('Location:afficherListeReclams.php');
     </nav>
     <!-- End Navbar -->
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(./assets/img/theme/bff.jpg); background-size: cover; background-position: center top;">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-8"></span>
-      <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Passer une réclamation tant que Admin </h1>
-            <p class="text-white mt-0 mb-5">Service réclamation</p>
-          </div>
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+
         </div>
       </div>
     </div>
-    <!-- Page content -->
     <div class="container-fluid mt--7">
-      
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-    
-            <div class="card-body">
-
-              <form method="POST" action="" >
-                <h6 class="heading-small text-muted mb-4">Réclamation</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <script src="reclamation.js"></script>
-                        <label for="name" class="form-control-label">CIN:
-                        </label>
-                        <input type="number" id="CIN"  class="form-control form-control-alternative" name="CIN" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv14" class="message" style='color:red'></div>
-                        <div id="msgDiv152" class="message" style='color:red'></div>
-                        <br>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                      <div class="form-group">
-             <label for="name" class="form-control-label">Nom:
-                   </label>
-                    <input type="text" id="Nom"   class="form-control form-control-alternative"  name="Nom" required minlenght="3" maxlength="20" size="10">
-                <div id="msgDiv1" class="message" style='color:red'></div>
-                     <div id="msgDiv12" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                <label for="name" class="form-control-label">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control form-control-alternative" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Email:
-                        </label>
-                        <input type="text" id="Email" class="form-control form-control-alternative" name="Email" required minlenght="3" maxlength="20" size="10">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="name" class="form-control-label">Numéro telephone:
-                        </label>
-                        <input type="Number" id="Num_tel" class="form-control form-control-alternative" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv2" class="message" style='color:red'></div>
-                        <div id="msgDiv22" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                    
-              <label for="Date_de_reclamation" class="form-control-label">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet2" class="form-control-label" >id service:
-                        </label>
-                        <input type="text" id="id_sujet2" name="id_sujet2" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label for="id_sujet" class="form-control-label" >id produit:
-                        </label>
-                        <input type="text" id="id_sujet" name="id_sujet" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Description</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label for="Description ">Description:
-                    </label>
-                    <textarea id="Description" name="Description"  class="form-control form-control-alternative" rows="5" cols="33">
-                    </textarea>
-                  </div>
-                </div>
-				<div class="pl-lg-4">
-                  <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
-                                                      <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
-													  </div>
-                </div>
-              </form>
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-0">Messagerie</h3>
             </div>
+            <div class="table-responsive">
+              <a href="ajoutermessage.php">Ajouter message </a>
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">CIN</th>
+                    <th scope="col">date</th>
+                    <th scope="col">message</th>
+
+                  
+                  </tr>
+                </thead>
+              
+                <tbody>
+                  <?php 
+                  foreach($messages as $value){
+                                      ?>
+                  <tr>
+                    <td> <?php echo $value["CINM"]; ?>  </td>
+                    <td> <?php echo $value["datee"]; ?>  </td>
+                      <td> <?php echo $value["messagee"]; ?>  </td>
+
+                    
+                      
+                    <td> <a href="supprimermessage.php?CINM=<?php echo $value['CINM']; ?>"><img src="stop.png" width='30px' height='30px'> </a> </td>
+                    <td> <a href="modifiermessage.php ?CINM=<?php echo $value['CINM']; ?>"> modifier </a>  </td>
+                    
+                  </tr>
+                  <?php
+}
+?>
+                  
+                </tbody>
+              </table>
+            </div>
+           
           </div>
         </div>
       </div>
+
       <!-- Footer -->
       <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+                Tim</a>
             </div>
           </div>
           <div class="col-xl-6">
@@ -409,7 +342,8 @@ header('Location:afficherListeReclams.php');
                 <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
               </li>
               <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link"
+                  target="_blank">MIT License</a>
               </li>
             </ul>
           </div>
@@ -420,17 +354,7 @@ header('Location:afficherListeReclams.php');
   <!--   Core   -->
   <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
   <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!--   Optional JS   -->
-  <!--   Argon JS   -->
-  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-dashboard-free"
-      });
-  </script>
+
 </body>
 
 </html>

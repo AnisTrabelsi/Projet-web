@@ -1,13 +1,9 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require '../controller/ReclamC.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
-$reclamcc= new reclamc();
-$reclamcc->ajouterreclam($reclamsaisie);
- //header('Location:afficherListeReclams.php');
-}
+$reclamd=new reclamc();
+$reclams=$reclamd->afficherreclam();
+ 
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -304,173 +300,72 @@ $reclamcc->ajouterreclam($reclamsaisie);
       <script src="reclamation.js"></script>
       <body>
           <div class="container">
-          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>
-              <div class="row justify-content-center">
-                  <div class="col-md-12">
-                      <div class="wrapper">
-                          <div class="row no-gutters">
-                              <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
-                                  <div class="contact-wrap w-100 p-md-5 p-4">
-                                      <h3 class="mb-4">Passer une réclamation </h3>
-                                      <div id="form-message-warning" class="mb-4"></div> 
- 
-                                      <form method="POST" action="" >
-                                          <div class="row">
-  
-                                          <div class="col-md-6">
-                                                  <div class="form-group">
-                                                  <script src="reclamation.js"></script>
-                                                  <fieldset width="2">
-  
-                                                      <label for="name">CIN:
-                                                      </label>
-                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv14" class="message" style='color:red'></div>
-                                                      <div id="msgDiv152" class="message" style='color:red'></div>
-                                                      <br>
-  
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                      <label for="name">Nom:
-                                                      </label>
-                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv1" class="message" style='color:red'></div>
-                                                      <div id="msgDiv12" class="message" style='color:red'></div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Email:
-                                                      </label>
-                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10">
-                                                      
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Numéro telephone:
-                                                      </label>
-                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-  
-              <label for="Date_de_reclamation">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" name="Date_de_reclamation" class="form-control" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-              <br>
-              </div>
-                                              </div>
-  
-                                              
-                                      
-                                              
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet2">id service:
-                                                      </label>
-                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                                          
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet">id produit:
-                                                      </label>
-                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-              <label for="Description ">Description:
-              </label>
-              <textarea id="Description" name="Description" class="form-control" rows="5" cols="33">
-              </textarea>
-               </div>
-              </div>
+          <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-2">Réclamations</h3>
+            </div>
+            <div class="table-responsive">
+              <a href="ajouterreclamclient.php">Ajouter réclamation </a>
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">CIN</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Num_tel</th>
+                    <th scope="col">Date_de_reclamation</th>
+                    <th scope="col">Id_produit</th>
+                    <th scope="col">Id_service</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
               
-                                                                                  
-  
-                                              <div class="col-md-12">
-                                                  
-                                              
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
-                                                      <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
-                                                      
-                                              
-                                              </div>
+                <tbody>
+                  <?php 
+                  foreach($reclams as $value){
+                                      ?>
+                  <tr>
+                    <td> <?php echo $value["CIN"]; ?>  </td>
+                 
+                      <td> <?php echo $value["Nom"]; ?>  </td>
 
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
+                    
+                      <td> <?php echo $value["Prenom"]; ?>   </td>
 
-                              <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
-                                  <div class="info-wrap bg-primary w-100 p-md-5 p-4">
-                                      <h3>Passer une réclamation</h3>
-                                      <p class="mb-4">Nous sommes à votre service</p>
-                              <div class="dbox w-100 d-flex align-items-start">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-map-marker"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Adresse</span> Ariana,El-ghazela,Esprit</p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-phone"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Telehone:</span> <a href="tel://1234567920">+ 216 27938360</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-paper-plane"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Email:</span> <a href="mailto:info@yoursite.com">Eco-life@esprit.tn</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-globe"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Website</span> <a href="#">Eco-life.tn</a></p>
-                                </div>
-                            </div>
-                        </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                    
+                    <td>
+                        <?php echo $value["Email"]; ?> 
+                     
+                    </td>
+                    <td> <?php echo $value["Num_tel"]; ?>  </td>
+                    <td> <?php echo $value["Date_de_reclamation"]; ?>  </td>
+                    <td> <?php echo $value["id_sujet"]; ?>  </td>
+                    <td> <?php echo $value["id_sujet2"]; ?>  </td>
+                    <td> <?php echo $value["Descriptionn"]; ?>  </td>
+                    <td> <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>"><img src="stop.png" width='30px' height='30px'> </a> </td>
+                    <td> <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>"> modifier </a>  </td>
+                    
+                  </tr>
+                  <?php
+}
+?>
+                  
+                </tbody>
+              </table>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+
+
+
+
               <br>
               <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
