@@ -2,8 +2,8 @@
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
+if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description'])&& isset($_POST['Statut']))
+{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description'],$_POST['Statut']);
 $reclamcc= new reclamc();
 $reclamcc->ajouterreclam($reclamsaisie);
 header('Location:afficherListeReclams.php');
@@ -18,8 +18,7 @@ header('Location:afficherListeReclams.php');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -128,13 +127,13 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="afficherListemessages.php">
+              <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="afficherListeReclams.php">
+              <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
@@ -148,13 +147,13 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="triascreclam.php">
+              <i class="ni ni-key-25 text-info"></i> Tri ascendant des réclamations  
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link" href="tridescreclam.php">
+              <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
            <li class="nav-item">
@@ -279,8 +278,8 @@ header('Location:afficherListeReclams.php');
           <div class="card bg-secondary shadow">
     
             <div class="card-body">
-
-              <form method="POST" action="" >
+            <script src="reclamation.js"></script>
+              <form method="POST" action=""  onsubmit="return verif();">
                 <h6 class="heading-small text-muted mb-4">Réclamation</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -321,7 +320,9 @@ header('Location:afficherListeReclams.php');
                       <div class="form-group">
                         <label for="name" class="form-control-label">Email:
                         </label>
-                        <input type="text" id="Email" class="form-control form-control-alternative" name="Email" required minlenght="3" maxlength="20" size="10">
+                        <input type="text" id="Email" class="form-control form-control-alternative" name="Email" required minlenght="3" size="10">
+                        <div id="msgDiv3" class="message" style='color:red'></div>
+
                       </div>
                     </div>
                   </div>
@@ -335,8 +336,7 @@ header('Location:afficherListeReclams.php');
                         <label for="name" class="form-control-label">Numéro telephone:
                         </label>
                         <input type="Number" id="Num_tel" class="form-control form-control-alternative" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                        <div id="msgDiv2" class="message" style='color:red'></div>
-                        <div id="msgDiv22" class="message" style='color:red'></div>
+                        <div id="msgDiv244" class="message" style='color:red'></div>
                       </div>
                     </div>
                   </div>
@@ -346,27 +346,55 @@ header('Location:afficherListeReclams.php');
                     
               <label for="Date_de_reclamation" class="form-control-label">Date_de_reclamation:
               </label>
-              <input type="date" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
+              <input type="datetime-local" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
                   maxlength="20" size="10">
               <div id="msgDiv6" class="message" style='color:red'></div>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label for="id_sujet2" class="form-control-label" >id service:
-                        </label>
-                        <input type="text" id="id_sujet2" name="id_sujet2" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
+                      <label for="id_sujet" id="id_sujet" class="form-control-label">choisissez l'id produit:
+                                                    </label>
+                                                    <select name="id_sujet"  class="form-control form-control-alternative" ><br>
+                                                        <option selected value="VIDE">choisissez l'id produit</option>
+                                                        <option value="001">Panneaux solaires</option>
+                                                        <option value="002">Helices</option>
+                                                        <option value="003">Moteur</option>
+
+                                                    </select>
+                  
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label for="id_sujet" class="form-control-label" >id produit:
-                        </label>
-                        <input type="text" id="id_sujet" name="id_sujet" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
+                      <label for="id_sujet2" id="id_sujet2" class="form-control-label">choisissez l'id service:
+            </label>
+            <select name=" id_sujet2" class="form-control form-control-alternative" >
+                                                        <option selected value="VIDE">choisissez l'id service
+                                                        </option>
+                                                        <option value="112">Réparation</option>
+                                                        <option value="111">Installation</option>
+                                                        <option value="110">Maintenance</option>
+
+                                                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div class="col-lg-4">
+                      <div class="form-group">
+                      <label for="Statut" id="Statut" class="form-control-label">Le statut:
+                                                    </label>
+                                                    <select name="Statut"  class="form-control form-control-alternative" ><br>
+                                                        <option selected value="pas traité">Donner le statut</option>
+                                                        <option value="pas traité">pas traité</option>
+                                                        <option value="en cours de traitement">en cours de traitement</option>
+                                                        <option value="traité">traité</option>
+
+                                                    </select>
+                  
+                      </div>
+                    </div>
                 <hr class="my-4" />
                 <!-- Description -->
                 <h6 class="heading-small text-muted mb-4">Description</h6>

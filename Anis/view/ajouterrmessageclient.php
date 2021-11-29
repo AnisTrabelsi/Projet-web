@@ -2,8 +2,8 @@
 require_once '../controller/messageC.php';
 require_once '../Model/message.php';
 
-if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
 $messagecc= new messagec();
 $messagecc->ajoutermessage($messagesaisie);
 header('Location:afficherListemessagesclient.php');
@@ -19,7 +19,9 @@ header('Location:afficherListemessagesclient.php');
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+    <title>Eco-life.tn</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -312,10 +314,11 @@ header('Location:afficherListemessagesclient.php');
                           <div class="row no-gutters">
                               <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
                                   <div class="contact-wrap w-100 p-md-5 p-4">
-                                      <h3 class="mb-4">Passer une réclamation </h3>
+                                      <h3 class="mb-4">Envoyer une message </h3>
                                       <div id="form-message-warning" class="mb-4"></div> 
- 
-                                      <form method="POST" action="" >
+                                      <script src="message.js"></script>
+                                      <form method="POST" action=""  onclick="verifm()">
+                                      <script src="message.js"></script>
                                           <div class="row">
   
                                           <div class="col-md-6">
@@ -325,22 +328,62 @@ header('Location:afficherListemessagesclient.php');
                                                       <label for="name">CIN:
                                                       </label>
                                                       <input type="number" id="CINM" class="form-control" name="CINM" required minlenght="3" maxlength="20" size="10">
-                                                     
+                                                      <div id="msgDivcin" class="message" style='color:red'></div>
+
                                                       <br>
   
                                                   </div>
                                               </div>
   
+
+
                                               <div class="col-md-6"> 
                                                       <label for="name">Date:
                                                       </label>
-                                                      <input type="date" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="datetime-local" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10">
 
                                               </div>
-  
+
+
+                                              <div class="col-md-6"> 
+                                              <div class="form-group">
+
+                                              <label for="id_produit_message" id="id_produit_message">
+                                                    </label>
+                                                    <select name="id_produit_message">
+                                                        <option selected value="VIDE">choisissez votre id produit réclamé</option>
+                                                        <option value="001">Panneaux solaires</option>
+                                                        <option value="002">Helices</option>
+                                                        <option value="003">Moteur</option>
+
+                                                    </select>
+                                                    </div>
+
+                                              </div>
+                                              <br>
+
+                                              <div class="col-md-6">
+                                              <div class="form-group">
+
+                                                    <label for="id_service_message" id="id_service_message">
+            </label>
+            <select name=" id_service_message">
+                                                        <option selected value="VIDE">choisissez votre id service réclamé
+                                                        </option>
+                                                        <option value="112">Réparation</option>
+                                                        <option value="111">Installation</option>
+                                                        <option value="110">Maintenance</option>
+
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <br>
+
   
                                               <div class="col-md-6"> 
-                                                  <div class="form-group">
+                                                  <div class="form-group">                                                     
+                                                  <br>
+
                                                       <label for="name">message:
                                                       </label>
                                                       <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="20" row="60" size="10"> </textarea>                                        
@@ -356,7 +399,7 @@ header('Location:afficherListemessagesclient.php');
                                               <div class="col-md-12">
                                                   
                                               
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary"   >
+                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary"   onclick="verifm()">
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
                                                       
                                               

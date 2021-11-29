@@ -4,15 +4,15 @@ require_once '../Model/message.php';
 
 $messageV=new messagec();
 
-if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
 
 $messageV->modifiermessage($messagesaisie);
 
 header('Location:afficherListemessagesclient.php');
 }else 
 {
-    $a=$messageV->getmessagebyid($_GET['CINM']);
+    $a=$messageV->getmessagebyid($_GET['datee']);
 }
 ?>
 
@@ -25,7 +25,9 @@ header('Location:afficherListemessagesclient.php');
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+    <title>Eco-life.tn</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -311,19 +313,18 @@ header('Location:afficherListemessagesclient.php');
       <script src="reclamation.js"></script>
       <body>
           <div class="container">
-          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>
               <div class="row justify-content-center">
                   <div class="col-md-12">
                       <div class="wrapper">
                           <div class="row no-gutters">
                               <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
                                   <div class="contact-wrap w-100 p-md-5 p-4">
-                                      <h3 class="mb-4">Passer une réclamation </h3>
+                                      <h3 class="mb-4">Modifier votre message </h3>
                                       <div id="form-message-warning" class="mb-4"></div> 
- 
-                                      <form method="POST" action="" >
+                                      <script src="message.js"></script>
+                                      <form method="POST" action=""  onsubmit="return verifm();" >
                                           <div class="row">
-  
+                                          <script src="message.js"></script>
                                           <div class="col-md-6">
                                                   <div class="form-group">
                                                   <fieldset width="2">
@@ -331,25 +332,40 @@ header('Location:afficherListemessagesclient.php');
                                                       <label for="name">CIN:
                                                       </label>
                                                       <input type="number" id="CINM" class="form-control" name="CINM" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CINM'];?>">
-                                                     
+                                                      <div id="msgDivcin" class="message" style='color:red'></div>
+
                                                       <br>
   
                                                   </div>
                                               </div>
-  
                                               <div class="col-md-6"> 
                                                       <label for="name">Date:
                                                       </label>
-                                                      <input type="date" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
+                                                      <input type="datetime-local" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
 
                                               </div>
+                                              <div class="col-md-6"> 
+                                                      <label for="name">
+                                                      </label>
+                                                      <input type="text" id="id_produit_message" class="form-control" name="id_produit_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_produit_message'];?>" style="display:none">
+
+                                              </div>
+
+                                              <div class="col-md-6"> 
+                                                      <label for="name">
+                                                      </label>
+                                                      <input type="text" id="id_service_message" class="form-control" name="id_service_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_service_message'];?>" style="display:none">
+
+                                              </div>
+
+                                            
   
   
                                               <div class="col-md-6"> 
-                                                  <div class="form-group">
+                                                  <div class="form-group"><br>
                                                       <label for="name">message:
                                                       </label>
-                                                      <input type="text" id="messagee" class="form-control" name="messagee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['messagee'];?>">
+                                                      <input type="text" id="messagee" class="form-control" name="messagee"  Value="<?php echo $a['messagee'];?>">
 
                                                   </div>
                                               </div>
@@ -362,7 +378,7 @@ header('Location:afficherListemessagesclient.php');
                                               <div class="col-md-12">
                                                   
                                               
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary"   >
+                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary"  onclick="verifm()" >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
                                                       
                                               
@@ -375,14 +391,14 @@ header('Location:afficherListemessagesclient.php');
 
                               <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
                                   <div class="info-wrap bg-primary w-100 p-md-5 p-4">
-                                      <h3>Passer une réclamation</h3>
+                                      <h3>Modifier votre message</h3>
                                       <p class="mb-4">Nous sommes à votre service</p>
                               <div class="dbox w-100 d-flex align-items-start">
                                   <div class="icon d-flex align-items-center justify-content-center">
                                       <span class="fa fa-map-marker"></span>
                                   </div>
                                   <div class="text pl-3">
-                                  <p><span>Adresse</span> Ariana,El-ghazela,Esprit</p>
+                                  <p><span>Adresse: Ariana,El-ghazela,Esprit</span> </p>
                                 </div>
                             </div>
                               <div class="dbox w-100 d-flex align-items-center">

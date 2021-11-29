@@ -1,21 +1,10 @@
 <?php
-require_once '../controller/ReclamC.php';
-require_once '../Model/Reclam.php';
+require '../controller/ReclamC.php';
 
-$reclamV=new reclamc();
-
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Descriptionn'])&& isset($_POST['Statut']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Descriptionn'],$_POST['Statut']);
-
-$reclamV->modifierreclam($reclamsaisie);
-
-header('Location:afficherListeReclamspourclient.php');
-}else 
-{
-    $a=$reclamV->getreclambyid($_GET['CIN']);
-}
+$reclamd=new reclamc();
+$reclams=$reclamd->tri_reclamtion_ascendant();
+ 
 ?>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -313,185 +302,118 @@ header('Location:afficherListeReclamspourclient.php');
       <script src="reclamation.js"></script>
       <body>
           <div class="container">
-          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>  
-              <div class="row justify-content-center">
-                  <div class="col-md-12">
-                      <div class="wrapper">
-                          <div class="row no-gutters">
-                              <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
-                                  <div class="contact-wrap w-100 p-md-5 p-4">
-                                      <h3 class="mb-4">Passer une réclamation </h3>
-                                      <div id="form-message-warning" class="mb-4"></div> 
-                                      <script src="reclamation.js"></script>
+          <div class="row">
 
-                                      <form method="POST" action="" onsubmit="return verif();">
-                                          <div class="row">
-                                          <script src="reclamation.js"></script>
-
-                                          <div class="col-md-6">
-                                                  <div class="form-group">
-                                                  <script src="reclamation.js"></script>
-                                                  <fieldset width="2">
-  
-                                                      <label for="name">CIN:
-                                                      </label>
-                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CIN'];?>">
-                                                      <div id="msgDiv14" class="message" style='color:red'></div>
-                                                      <div id="msgDiv152" class="message" style='color:red'></div>
-                                                      <br>
-  
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                      <label for="name">Nom:
-                                                      </label>
-                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Nom'];?>">
-                                                      <div id="msgDiv1" class="message" style='color:red'></div>
-                                                      <div id="msgDiv12" class="message" style='color:red'></div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Prenom'];?>">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Email:
-                                                      </label>
-                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Email'];?>">
-                                                      <div id="msgDiv3" class="message" style='color:red'></div>
-
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Numéro telephone:
-                                                      </label>
-                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['Num_tel'];?>">
-                                                      <div id="msgDiv1" class="message" style='color:red'></div>
-                                                      <div id="msgDiv244" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-  
-              <label for="Date_de_reclamation">Date_de_reclamation:
-              </label>
-              <input type="datetime-local" id="Date_de_reclamation" name="Date_de_reclamation" class="form-control" required minlenght="3"
-                  maxlength="20" size="10" Value="<?php echo $a['Date_de_reclamation'];?>">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-              <br>
-              </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet">id produit:
-                                                      </label>
-                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit" Value="<?php echo $a['id_sujet'];?>" >
-                                                  </div>
-                                              </div>
-                                      
-                                              
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet2">id service:
-                                                      </label>
-                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service"  Value="<?php echo $a['id_sujet2'];?>">
-                                          
-                                                  </div>
-                                              </div>
-  
-                                             
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-              <label for="Description ">Description:
-              </label>
-            
-              <input type="textarea" id="Descriptionn" name="Descriptionn"  required minlenght="3" class="form-control" maxlength="20" size="10" placeholder="Descriptionn" Value="<?php echo $a['Descriptionn'];?>" >
-               </div>
-              </div>
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <h3 class="mb-2">Réclamations</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                <tr align="center">
+                    <th scope="col">CIN</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Num_tel</th>
+                    <th scope="col">Date_de_reclamation</th>
+                    <th scope="col">Id_produit</th>
+                    <th scope="col">Id_service</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">chercher la disccussion relative</th>
+                    <th scope="col">modifier</th>
+                    <th scope="col">supprimer</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
               
-              <div class="col-md-6"> 
-                                                  <div class="form-group">                            
-              <label for="Statut" style="display:block">
-              </label>
-              <input type="text" id="Statut" name="Statut" required minlenght="3"
-                  maxlength="20" size="10" Value="<?php echo $a['Statut'];?>"  style="display:none">
-              <br>
-              </div>
-                                              </div>                                              
-  
-                                              <div class="col-md-12">
-                                                  
-                                              
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
-                                                      <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
-                                                      
-                                              
-                                              </div>
+                <tbody>
+                  <?php 
+                  foreach($reclams as $value){
+                                      ?>
+                  <tr align="center">
+                    <th> <?php echo $value["CIN"]; ?>  </th>
+                 
+                      <th> <?php echo $value["Nom"]; ?>  </th>
 
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
+                    
+                      <th> <?php echo $value["Prenom"]; ?>   </th>
 
-                              <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
-                                  <div class="info-wrap bg-primary w-100 p-md-5 p-4">
-                                      <h3>Passer une réclamation</h3>
-                                      <p class="mb-4">Nous sommes à votre service</p>
-                              <div class="dbox w-100 d-flex align-items-start">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-map-marker"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Adresse</span> Ariana,El-ghazela,Esprit</p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-phone"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Telehone:</span> <a href="tel://1234567920">+ 216 27938360</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-paper-plane"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Email:</span> <a href="mailto:info@yoursite.com">Eco-life@esprit.tn</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-globe"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Website</span> <a href="#">Eco-life.tn</a></p>
-                                </div>
-                            </div>
-                        </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                    
+                    <th>
+                        <?php echo $value["Email"]; ?> 
+                     
+                    </th>
+                    <th> <?php echo $value["Num_tel"]; ?>  </th>
+                    <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
+                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="150px" height="150px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
+
+
+
+                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="150px" height="150px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
+                   
+                   
+                    <th> <?php echo $value["Statut"]; ?> 
+                    <?php if ($value["Statut"] =="traité") { ?> 
+                    <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:block">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none"> 
+<?php } else if ($value["Statut"] =="en cours de traitement") {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none">  
+  <?php } else {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:block">  
+
+  <?php } ?> </th>
+
+                    <th> <a href="chercher_messages_client.php ?id_sujet=<?php echo $value['id_sujet'];?> & id_sujet2=<?php echo $value['id_sujet2'];?>"> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
+               
+                   
+                    <th>   <?php if ($value["Statut"] =="en cours de traitement")  { ?>  
+                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
+                    
+                           <?php } else if ($value["Statut"] =="traité") { ?>  
+                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
+
+                           <?php } else  {?> 
+                            <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:block">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:block"></a> 
+                            <?php } ?>
+
+                    </th>
+
+                    <th>    
+                    <?php if ($value["Statut"] =="en cours de traitement")  {?>      
+                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+
+                    <?php } else if  ($value["Statut"] =="traité") {?>      
+                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+                    <?php } else  {?> 
+                        <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:block">  <img src="./assets/supprimer.png" width='30px' height='30px' style="display:block"> </a> 
+                        <?php } ?>
+
+                </th>
+
+                  </tr>
+                 
+
+                  <?php } ?>
+
+                  
+                </tbody>
+              </table>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+
+
+<br>
+      <a href="triascreclamclient.php" class="btn btn-primary">Tri ascendant des réclamations </a> 
+          <a href="tridescreclamclient.php" class="btn btn-primary">Tri descendant des réclamations </a>
+
               <br>
+              <a href="ajouterreclamclient.php" class="btn btn-primary">Ajouter réclamation </a>
               <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
           </div>

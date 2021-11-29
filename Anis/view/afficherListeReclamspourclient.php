@@ -14,7 +14,9 @@ $reclams=$reclamd->afficherreclam();
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+    <title>Eco-life.tn</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -301,16 +303,16 @@ $reclams=$reclamd->afficherreclam();
       <body>
           <div class="container">
           <div class="row">
+
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
               <h3 class="mb-2">Réclamations</h3>
             </div>
             <div class="table-responsive">
-              <a href="ajouterreclamclient.php">Ajouter réclamation </a>
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr>
+                <tr align="center">
                     <th scope="col">CIN</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
@@ -319,7 +321,10 @@ $reclams=$reclamd->afficherreclam();
                     <th scope="col">Date_de_reclamation</th>
                     <th scope="col">Id_produit</th>
                     <th scope="col">Id_service</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">chercher la disccussion relative</th>
+                    <th scope="col">modifier</th>
+                    <th scope="col">supprimer</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -328,31 +333,70 @@ $reclams=$reclamd->afficherreclam();
                   <?php 
                   foreach($reclams as $value){
                                       ?>
-                  <tr>
-                    <td> <?php echo $value["CIN"]; ?>  </td>
+                  <tr align="center">
+                    <th> <?php echo $value["CIN"]; ?>  </th>
                  
-                      <td> <?php echo $value["Nom"]; ?>  </td>
+                      <th> <?php echo $value["Nom"]; ?>  </th>
 
                     
-                      <td> <?php echo $value["Prenom"]; ?>   </td>
+                      <th> <?php echo $value["Prenom"]; ?>   </th>
 
                     
-                    <td>
+                    <th>
                         <?php echo $value["Email"]; ?> 
                      
-                    </td>
-                    <td> <?php echo $value["Num_tel"]; ?>  </td>
-                    <td> <?php echo $value["Date_de_reclamation"]; ?>  </td>
-                    <td> <?php echo $value["id_sujet"]; ?>  </td>
-                    <td> <?php echo $value["id_sujet2"]; ?>  </td>
-                    <td> <?php echo $value["Descriptionn"]; ?>  </td>
-                    <td> <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>"><img src="stop.png" width='30px' height='30px'> </a> </td>
-                    <td> <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>"> modifier </a>  </td>
+                    </th>
+                    <th> <?php echo $value["Num_tel"]; ?>  </th>
+                    <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
+                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="150px" height="150px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
+
+
+
+                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="150px" height="150px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
+                   
+                   
+                    <th> <?php echo $value["Statut"]; ?> 
+                    <?php if ($value["Statut"] =="traité") { ?> 
+                    <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:block">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none"> 
+<?php } else if ($value["Statut"] =="en cours de traitement") {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none">  
+  <?php } else {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:block">  
+
+  <?php } ?> </th>
+
+                    <th> <a href="chercher_messages_client.php ?id_sujet=<?php echo $value['id_sujet'];?> & id_sujet2=<?php echo $value['id_sujet2'];?>"> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
+               
+                   
+                    <th>   <?php if ($value["Statut"] =="en cours de traitement")  { ?>  
+                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
                     
+                           <?php } else if ($value["Statut"] =="traité") { ?>  
+                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
+
+                           <?php } else  {?> 
+                            <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:block">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:block"></a> 
+                            <?php } ?>
+
+                    </th>
+
+                    <th>    
+                    <?php if ($value["Statut"] =="en cours de traitement")  {?>      
+                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+
+                    <?php } else if  ($value["Statut"] =="traité") {?>      
+                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+                    <?php } else  {?> 
+                        <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:block">  <img src="./assets/supprimer.png" width='30px' height='30px' style="display:block"> </a> 
+                        <?php } ?>
+
+                </th>
+
                   </tr>
-                  <?php
-}
-?>
+                 
+
+                  <?php } ?>
+
                   
                 </tbody>
               </table>
@@ -364,9 +408,12 @@ $reclams=$reclamd->afficherreclam();
 
 
 
-
+<br>
+      <a href="triascreclamclient.php" class="btn btn-primary">Tri ascendant des réclamations </a> 
+          <a href="tridescreclamclient.php" class="btn btn-primary">Tri descendant des réclamations </a>
 
               <br>
+              <a href="ajouterreclamclient.php" class="btn btn-primary">Ajouter réclamation </a>
               <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
           </div>

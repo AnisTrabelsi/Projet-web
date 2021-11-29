@@ -15,7 +15,9 @@ $messages=$messaged->affichermessage();
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+    <title>Eco-life.tn</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -307,14 +309,16 @@ $messages=$messaged->affichermessage();
               <h3 class="mb-2">Messgerie</h3>
             </div>
             <div class="table-responsive">
-              <a href="ajouterrmessageclient.php">Ajouter message </a>
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">CIN</th>
+                    <th scope="col">id produit</th>
+                    <th scope="col">id service</th>
                     <th scope="col">Date</th>
                     <th scope="col">Message</th>
-                   
+                    <th scope="col">modifier</th>
+                    <th scope="col">supprimer</th>
                   </tr>
                 </thead>
               
@@ -324,15 +328,13 @@ $messages=$messaged->affichermessage();
                                       ?>
                   <tr>
                     <td> <?php echo $value["CINM"]; ?>  </td>
-                 
+                    <td> <?php echo $value["id_produit_message"]; ?>  </td>
+                    <td> <?php echo $value["id_service_message"]; ?>  </td>
                       <td> <?php echo $value["datee"]; ?>  </td>
-
-                    
                       <td> <?php echo $value["messagee"]; ?>   </td>
 
-                  
-                    <td> <a href="supprimermessageclient.php?CINM=<?php echo $value['CINM']; ?>"><img src="stop.png" width='30px' height='30px'> </a> </td>
-                    <td> <a href="modifiermessageclient.php ?CINM=<?php echo $value['CINM']; ?>"> modifier </a>  </td>
+                      <td> <a href="modifiermessageclient.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
+                    <td> <a href="supprimermessageclient.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
                     
                   </tr>
                   <?php
@@ -352,6 +354,7 @@ $messages=$messaged->affichermessage();
 
 
               <br>
+              <a href="ajouterrmessageclient.php" class="btn btn-primary">Ajouter message </a>
               <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Consulter les réclamations</a>  
 
           </div>

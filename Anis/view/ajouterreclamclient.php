@@ -2,8 +2,8 @@
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description']);
+if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description'])&& isset($_POST['Statut']))
+{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description'],$_POST['Statut']);
 $reclamcc= new reclamc();
 $reclamcc->ajouterreclam($reclamsaisie);
  //header('Location:afficherListeReclams.php');
@@ -18,13 +18,15 @@ $reclamcc->ajouterreclam($reclamsaisie);
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+
+    <title>Eco-life.tn</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-       <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
@@ -32,7 +34,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    
+
 </head>
 
 <body>
@@ -289,197 +291,233 @@ $reclamcc->ajouterreclam($reclamsaisie);
     <!-- Contact Section End -->
 
     <!-- Contact Form Begin -->
-    
-<html lang="en">
+
+    <html lang="en">
+
     <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/cssform/font-awesome.min.css">
-      
-      <link rel="stylesheet" href="cssform/style.css">
-  
-      </head>
-      <script src="reclamation.js"></script>
-      <body>
-          <div class="container">
-          <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>
-              <div class="row justify-content-center">
-                  <div class="col-md-12">
-                      <div class="wrapper">
-                          <div class="row no-gutters">
-                              <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
-                                  <div class="contact-wrap w-100 p-md-5 p-4">
-                                      <h3 class="mb-4">Passer une réclamation </h3>
-                                      <div id="form-message-warning" class="mb-4"></div> 
- 
-                                      <form method="POST" action="" >
-                                          <div class="row">
-  
-                                          <div class="col-md-6">
-                                                  <div class="form-group">
-                                                  <script src="reclamation.js"></script>
-                                                  <fieldset width="2">
-  
-                                                      <label for="name">CIN:
-                                                      </label>
-                                                      <input type="number" id="CIN" class="form-control" name="CIN" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv14" class="message" style='color:red'></div>
-                                                      <div id="msgDiv152" class="message" style='color:red'></div>
-                                                      <br>
-  
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                      <label for="name">Nom:
-                                                      </label>
-                                                      <input type="text" id="Nom" class="form-control" name="Nom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv1" class="message" style='color:red'></div>
-                                                      <div id="msgDiv12" class="message" style='color:red'></div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Prenom:
-                                                      </label>
-                                                      <input type="text" id="Prenom" class="form-control" name="Prenom" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Email:
-                                                      </label>
-                                                      <input type="text" id="Email" class="form-control" name="Email" required minlenght="3" maxlength="20" size="10">
-                                                      
-                                                  </div>
-                                              </div>
-  
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="name">Numéro telephone:
-                                                      </label>
-                                                      <input type="Number" id="Num_tel" class="form-control" name="Num_tel" required minlenght="3" maxlength="20" size="10">
-                                                      <div id="msgDiv2" class="message" style='color:red'></div>
-                                                      <div id="msgDiv22" class="message" style='color:red'></div>
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-  
-              <label for="Date_de_reclamation">Date_de_reclamation:
-              </label>
-              <input type="date" id="Date_de_reclamation" name="Date_de_reclamation" class="form-control" required minlenght="3"
-                  maxlength="20" size="10">
-              <div id="msgDiv6" class="message" style='color:red'></div>
-              <br>
-              </div>
-                                              </div>
-  
-                                              
-                                      
-                                              
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet2">id service:
-                                                      </label>
-                                                      <input type="text" id="id_sujet2" name="id_sujet2" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" >
-                                          
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-                                                      <label for="id_sujet">id produit:
-                                                      </label>
-                                                      <input type="text" id="id_sujet" name="id_sujet" class="form-control"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit"  >
-                                                  </div>
-                                              </div>
-  
-                                              <div class="col-md-6"> 
-                                                  <div class="form-group">
-              <label for="Description ">Description:
-              </label>
-              <textarea id="Description" name="Description" class="form-control" rows="5" cols="33">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/cssform/font-awesome.min.css">
+
+        <link rel="stylesheet" href="cssform/style.css">
+
+    </head>
+    <script src="reclamation.js"></script>
+
+    <body>
+        <div class="container">
+            <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Afficher les réclamations</a>
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <h3 class="mb-4">Passer une réclamation </h3>
+                                    <div id="form-message-warning" class="mb-4"></div>
+                                    <script src="reclamation.js"></script>
+
+                                    <form method="POST" action="" onsubmit="return verif();">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                   <script src="reclamation.js"></script>
+                                                    <fieldset width="2">
+
+                                                        <label for="name">CIN:
+                                                        </label>
+                                                        <input type="number" id="CIN" class="form-control" name="CIN"
+                                                            required minlenght="3" maxlength="20" size="10">
+                                                        <div id="msgDiv14" class="message" style='color:red'></div>
+                                                        <div id="msgDiv152" class="message" style='color:red'></div>
+                                                        <br>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="name">Nom:
+                                                </label>
+                                                <input type="text" id="Nom" class="form-control" name="Nom" required
+                                                    minlenght="3" maxlength="20" size="10">
+                                                <div id="msgDiv1" class="message" style='color:red'></div>
+                                                <div id="msgDiv12" class="message" style='color:red'></div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Prenom:
+                                                    </label>
+                                                    <input type="text" id="Prenom" class="form-control" name="Prenom"
+                                                        required minlenght="3" maxlength="20" size="10">
+                                                    <div id="msgDiv2" class="message" style='color:red'></div>
+                                                    <div id="msgDiv22" class="message" style='color:red'></div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Email:
+                                                    </label>
+                                                    <input type="text" id="Email" class="form-control" name="Email"
+                                                        required minlenght="3"  size="10">
+                                                    <div id="msgDiv3" class="message" style='color:red'></div>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Numéro telephone:
+                                                    </label>
+                                                    <input type="Number" id="Num_tel" class="form-control"
+                                                        name="Num_tel" required minlenght="3" maxlength="20" size="10">
+                                                    <div id="msgDiv244" class="message" style='color:red'></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label for="Date_de_reclamation">Date_de_reclamation:
+                                                    </label>
+                                                    <input type="datetime-local" id="Date_de_reclamation"
+                                                        name="Date_de_reclamation" class="form-control" required
+                                                        minlenght="3" maxlength="20" size="10">
+                                                    <div id="msgDiv6" class="message" style='color:red'></div>
+                                                    <br>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="id_sujet" id="id_sujet">
+                                                    </label>
+                                                    <select name="id_sujet"><br>
+                                                        <option selected value="VIDE">choisissez l'id produit</option>
+                                                        <option value="001">Panneaux solaires</option>
+                                                        <option value="002">Helices</option>
+                                                        <option value="003">Moteur</option>
+
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="id_sujet2" id="id_sujet2">
+            </label>
+            <select name=" id_sujet2">
+                                                        <option selected value="VIDE">choisissez l'id service
+                                                        </option>
+                                                        <option value="112">Réparation</option>
+                                                        <option value="111">Installation</option>
+                                                        <option value="110">Maintenance</option>
+
+                                                        </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                <br><label for="Description ">Description:
+                                                    </label>
+                                                    <textarea id="Description" name="Description" class="form-control"
+                                                        rows="7" cols="33">
               </textarea>
-               </div>
-              </div>
-              
-                                                                                  
-  
-                                              <div class="col-md-12">
-                                                  
-                                              
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
-                                                      <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
-                                                      
-                                              
-                                              </div>
+                                                </div>
+                                            </div>
 
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                            <label for="Statut" style="display:none">
+                                                    </label>
+                                            <input type="text" id="Statut" class="form-control" name="Statut"
+                                            style="display:none" value="pas traité">
+  </div>
+                                            </div>
 
-                              <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
-                                  <div class="info-wrap bg-primary w-100 p-md-5 p-4">
-                                      <h3>Passer une réclamation</h3>
-                                      <p class="mb-4">Nous sommes à votre service</p>
-                              <div class="dbox w-100 d-flex align-items-start">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-map-marker"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Adresse</span> Ariana,El-ghazela,Esprit</p>
+
+                                            <div class="col-md-12">
+
+
+                                                <input type="submit" name="add" value="Envoyer" class="btn btn-primary">
+                                                <input type="reset" value="Effacer" id="effacer"
+                                                    class="btn btn-primary">
+
+
+                                            </div>
+
+                                        </div>
+                                      
+                                    </form>
                                 </div>
                             </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-phone"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Telehone:</span> <a href="tel://1234567920">+ 216 27938360</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-paper-plane"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Email:</span> <a href="mailto:info@yoursite.com">Eco-life@esprit.tn</a></p>
-                                </div>
-                            </div>
-                              <div class="dbox w-100 d-flex align-items-center">
-                                  <div class="icon d-flex align-items-center justify-content-center">
-                                      <span class="fa fa-globe"></span>
-                                  </div>
-                                  <div class="text pl-3">
-                                  <p><span>Website</span> <a href="#">Eco-life.tn</a></p>
+
+                            <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
+                                <div class="info-wrap bg-primary w-100 p-md-5 p-4">
+                                    <h3>Passer une réclamation</h3>
+                                    <p class="mb-4">Nous sommes à votre service</p>
+                                    <div class="dbox w-100 d-flex align-items-start">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-map-marker"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Adresse: Ariana,El-ghazela,Esprit</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-phone"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Telehone:</span> <a href="tel://1234567920">+ 216 27938360</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-paper-plane"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Email:</span> <a
+                                                    href="mailto:info@yoursite.com">Eco-life@esprit.tn</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-globe"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Website</span> <a href="#">Eco-life.tn</a></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <br>
-              <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
+                    </div>
+                </div>
+            </div>
+            <br>
+            <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>
 
-          </div>
-  
-      </body>
-  </html>
-  
-  
+        </div>
+
+    </body>
+
+    </html>
+
+
     <!-- Contact Form End -->
 
     <!-- Footer Section Begin -->

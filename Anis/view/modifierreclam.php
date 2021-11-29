@@ -4,9 +4,8 @@ require_once '../Model/Reclam.php';
 
 $reclamV=new reclamc();
 
-if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Descriptionn']))
-{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Descriptionn']);
-
+if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Descriptionn'])&& isset($_POST['Statut']))
+{$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Descriptionn'],$_POST['Statut']);
 $reclamV->modifierreclam($reclamsaisie);
 
 header('Location:afficherListeReclams.php');
@@ -16,7 +15,6 @@ header('Location:afficherListeReclams.php');
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +22,7 @@ header('Location:afficherListeReclams.php');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Eco-life.tn
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -46,7 +43,7 @@ header('Location:afficherListeReclams.php');
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="./assets/img/brand/blue.png" class="navbar-brand-img"  alt="...">
+        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -134,33 +131,33 @@ header('Location:afficherListeReclams.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="afficherListemessages.php">
+              <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="afficherListeReclams.php">
+              <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="../examples/profile.html">
+            <a class="nav-link   " href="ajouterreclam.php">
               <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Tables
+            <a class="nav-link " href="ajoutermessage.php">
+              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="triascreclam.php">
+              <i class="ni ni-key-25 text-info"></i> Tri ascendant des réclamations  
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link" href="tridescreclam.php">
+              <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
            <li class="nav-item">
@@ -272,7 +269,7 @@ header('Location:afficherListeReclams.php');
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Passer une réclamation tant que Admin </h1>
+            <h1 class="display-2 text-white">Modifier une réclamation tant que Admin </h1>
             <p class="text-white mt-0 mb-5">Service réclamation</p>
           </div>
         </div>
@@ -285,8 +282,9 @@ header('Location:afficherListeReclams.php');
           <div class="card bg-secondary shadow">
     
             <div class="card-body">
+            <script src="reclamation.js"></script>
 
-              <form method="POST" action="" >
+              <form method="POST" action=""  onsubmit="return verif();" >
                 <h6 class="heading-small text-muted mb-4">Réclamation</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -352,23 +350,37 @@ header('Location:afficherListeReclams.php');
                     
               <label for="Date_de_reclamation" class="form-control-label">Date_de_reclamation:
               </label>
-              <input type="date" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
+              <input type="datetime-local" id="Date_de_reclamation" class="form-control form-control-alternative" name="Date_de_reclamation" required minlenght="3"
                   maxlength="20" size="10" Value="<?php echo $a['Date_de_reclamation'];?>">
               <div id="msgDiv6" class="message" style='color:red'></div>
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label for="id_sujet2" class="form-control-label" >id service:
-                        </label>
-                        <input type="text" id="id_sujet2" name="id_sujet2" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du service" Value="<?php echo $a['id_sujet2'];?>">
+                      <label for="id_sujet" id="id_sujet"  class="form-control-label">choisissez l'id produit:
+                                                    </label>
+                                                    <select name="id_sujet"   class="form-control form-control-alternative" ><br>
+                                                        <option selected value="<?php echo $a['id_sujet'];?>"> <?php echo $a['id_sujet'];?></option>
+                                                        <option value="001">Panneaux solaires</option>
+                                                        <option value="002">Helices</option>
+                                                        <option value="003">Moteur</option>
+
+                                                    </select>
+                  
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label for="id_sujet" class="form-control-label"  >id produit:
-                        </label>
-                        <input type="text" id="id_sujet" name="id_sujet" class="form-control form-control-alternative"  required minlenght="3" maxlength="20" size="10" placeholder="id du produit" Value="<?php echo $a['id_sujet'];?>" >
+                      <label for="id_sujet2" id="id_sujet2" name=" id_sujet2" class="form-control-label">choisissez l'id service:
+            </label>
+            <select name=" id_sujet2" class="form-control form-control-alternative" >
+                                                        <option selected value="<?php echo $a['id_sujet2'];?>"><?php echo $a['id_sujet'];?>
+                                                        </option>
+                                                        <option value="112">Réparation</option>
+                                                        <option value="111">Installation</option>
+                                                        <option value="110">Maintenance</option>
+
+                                                        </select>
                       </div>
                     </div>
                   </div>
@@ -381,16 +393,29 @@ header('Location:afficherListeReclams.php');
                     
 					<label for="Description ">Description:
             </label>
-            <input type="textarea" id="Descriptionn" name="Descriptionn"  required minlenght="3" class="form-control form-control-alternative" maxlength="20" size="10" placeholder="Descriptionn" Value="<?php echo $a['Descriptionn'];?>" >
-            </textarea>
+            <input type="text" id="Descriptionn" name="Descriptionn"  required minlenght="3" class="form-control form-control-alternative" maxlength="20" size="10" placeholder="Descriptionn" Value="<?php echo $a['Descriptionn'];?>" >
                   </div>
                 </div>
 
+                <div class="col-lg-4">
+                      <div class="form-group">
+                      <label for="Statut" id="Statut" class="form-control-label">Le statut:
+                                                    </label>
+                                                    <select name="Statut" id="Statut"  class="form-control form-control-alternative" ><br>
+                                                        <option selected value="<?php echo $a['Statut'];?>"><?php echo $a['Statut'];?></option>
+                                                        <option value="pas traité">pas traité</option>
+                                                        <option value="en cours de traitement">en cours de traitement</option>
+                                                        <option value="traité">traité</option>
+
+                                                    </select>
+                  
+                      </div>
+                    </div>
 
 				<div class="pl-lg-4">
                   <div class="form-group">
 				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
-                                                      <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
+        <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
               </form>

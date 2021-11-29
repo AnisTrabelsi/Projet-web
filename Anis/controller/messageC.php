@@ -3,7 +3,7 @@ require '../config.php';
 
 class messagec{  
 function affichermessage(){
-$requete="select * from message1";
+$requete="select * from message1 ORDER BY datee ASC";
 $config= config::getConnexion();
 try{
 $query=$config->prepare($requete);
@@ -16,7 +16,7 @@ $e->getMesssage();
 }}
 
 function getmessagebyid($id){
-    $requete="select * from message1 where CINM=:id ";
+    $requete="select * from message1 where datee=:id ";
     $config= config::getConnexion();
     try{
     $query=$config->prepare($requete);
@@ -39,11 +39,13 @@ function ajoutermessage($message)
 
 try{
     $query=$config->prepare(
-'INSERT INTO message1(CINM,datee,messagee)
-VALUES(:CINM,:datee,:messagee)');
+'INSERT INTO message1(CINM,id_produit_message,id_service_message,datee,messagee)
+VALUES(:CINM,:id_produit_message,:id_service_message,:datee,:messagee)');
 
 $query->execute([ 
     'CINM'=>$message->getCINM(),
+    'id_produit_message'=>$message->getid_produit_message(),
+    'id_service_message'=>$message->getid_service_message(),
     'datee'=>$message->getdatee(),
     'messagee'=>$message->getmessage()
  
@@ -59,7 +61,7 @@ function supprimermessage($id){
 
 try{
     $querry=$config->prepare(
-'DELETE FROM message1 WHERE CINM =:id
+'DELETE FROM message1 WHERE datee =:id
 ');
 
 $querry->execute([ 
@@ -79,11 +81,13 @@ function modifiermessage($message)
 
 try{
     $query=$config->prepare(
-'UPDATE message1 SET datee=:datee,messagee=:messagee
-where CINM=:CINM');
+'UPDATE message1 SET CINM=:CINM,id_produit_message=:id_produit_message,id_service_message=:id_service_message,messagee=:messagee
+where datee=:datee');
 
 $query->execute([ 
     'CINM'=>$message->getCINM(),
+    'id_produit_message'=>$message->getid_produit_message(),
+    'id_service_message'=>$message->getid_service_message(),
     'datee'=>$message->getdatee(),
     'messagee'=>$message->getmessage()
 
@@ -92,5 +96,8 @@ $query->execute([
     $e->getMessage();
 }}
 
+
 }
+
+
 ?>

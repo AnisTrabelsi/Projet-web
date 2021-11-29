@@ -2,8 +2,8 @@
 require_once '../controller/messageC.php';
 require_once '../Model/message.php';
 
-if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
 $messagecc= new messagec();
 $messagecc->ajoutermessage($messagesaisie);
 header('Location:afficherListemessages.php');
@@ -18,8 +18,7 @@ header('Location:afficherListemessages.php');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -128,13 +127,13 @@ header('Location:afficherListemessages.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="afficherListemessages.php">
+              <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link " href="afficherListeReclams.php">
+              <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
@@ -143,18 +142,18 @@ header('Location:afficherListemessages.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active " href="ajoutermessage.php">
-              <i class="ni ni-bullet-list-67 text-red"></i> Ajouter un message
+            <a class="nav-link active" href="ajoutermessage.php">
+              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="triascreclam.php">
+              <i class="ni ni-key-25 text-info"></i> Tri ascendant des réclamations  
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link" href="tridescreclam.php">
+              <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
            <li class="nav-item">
@@ -266,7 +265,7 @@ header('Location:afficherListemessages.php');
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
           <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">envoyer un message tant que Admin </h1>
+            <h1 class="display-2 text-white">Envoyer un message tant que Admin </h1>
             <p class="text-white mt-0 mb-5">Service Messagerie</p>
           </div>
         </div>
@@ -277,10 +276,11 @@ header('Location:afficherListemessages.php');
       
         <div class="col-xl-8 order-xl-1">
           <div class="card bg-secondary shadow">
-    
+          <script src="message.js"></script>
             <div class="card-body">
-            <form method="POST" action="" >
-                <h6 class="heading-small text-muted mb-4">Réclamation</h6>
+            <form method="POST" action=""   onsubmit="return verifm();">
+            <script src="message.js"></script>
+                <h6 class="heading-small text-muted mb-4">Messagerie</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
@@ -288,33 +288,66 @@ header('Location:afficherListemessages.php');
                         <label for="CINM" class="form-control-label">CIN:
                         </label>
                         <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10">
-              
+                        <div id="msgDivcin" class="message" style='color:red'></div>
+
                         <br>
                       </div>
                     </div>
 
+                     
                     <div class="col-lg-6">
                       <div class="form-group">
              <label for="Date" class="form-control-label">Date:
                    </label>
-                    <input type="date" id="datee"  class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10">
+                    <input type="datetime-local" id="datee"  class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10">
             
                       </div>
                     </div>
-                  </div>
 
-                  <div class="row">
+                  <div class="col-md-6"> 
+                                              <div class="form-group">
+
+                                              <label for="id_produit_message" id="id_produit_message" > Produit:
+                                                    </label>
+                                                    <select name="id_produit_message" class="form-control form-control-alternative" >
+                                                        <option selected value="VIDE">choisissez votre id produit réclamé</option>
+                                                        <option value="001">Panneaux solaires</option>
+                                                        <option value="002">Helices</option>
+                                                        <option value="003">Moteur</option>
+
+                                                    </select>
+                                                    </div>
+
+                                              </div>
+
+                                              <div class="col-md-6">
+                                              <div class="form-group">
+
+                                                    <label for="id_service_message" id="id_service_message">Service:
+            </label>
+            <select name=" id_service_message" class="form-control form-control-alternative" >
+                                                        <option selected value="VIDE">choisissez votre id service réclamé
+                                                        </option>
+                                                        <option value="112">Réparation</option>
+                                                        <option value="111">Installation</option>
+                                                        <option value="110">Maintenance</option>
+
+                                                        </select>
+                                                </div>
+                                            </div>
+                
                     <div class="col-lg-6">
                       <div class="form-group">
                 <label for="message" class="form-control-label">message:
                             </label>
-                             <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="20" row="60" size="10"> </textarea>                                        
+                             <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="100" row="100" size="10"> </textarea>                                        
                       </div>
                     </div>
-                    
+                    </div>
+
 				<div class="pl-lg-4">
                   <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary"  >
+				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verifm()" >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>

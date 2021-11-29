@@ -13,8 +13,7 @@ $reclams=$reclamd->afficherreclam();
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -30,23 +29,20 @@ $reclams=$reclamd->afficherreclam();
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
       <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
-        aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="./assets/img/brand/blue.png"   class="navbar-brand-img" alt="...">
+        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
+          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="ni ni-bell-55"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right"
-            aria-labelledby="navbar-default_dropdown_1">
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
@@ -57,8 +53,7 @@ $reclams=$reclamd->afficherreclam();
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg
-">
+  
               </span>
             </div>
           </a>
@@ -101,8 +96,7 @@ $reclams=$reclamd->afficherreclam();
               </a>
             </div>
             <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main"
-                aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
                 <span></span>
                 <span></span>
               </button>
@@ -112,8 +106,7 @@ $reclams=$reclamd->afficherreclam();
         <!-- Form -->
         <form class="mt-4 mb-3 d-md-none">
           <div class="input-group input-group-rounded input-group-merge">
-            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search"
-              aria-label="Search">
+            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span class="fa fa-search"></span>
@@ -129,36 +122,36 @@ $reclams=$reclamd->afficherreclam();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="afficherListemessages.php">
+              <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link active" href="afficherListeReclams.php">
+              <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/profile.html">
-              <i class="ni ni-single-02 text-yellow"></i> User profile
+            <a class="nav-link   " href="ajouterreclam.php">
+              <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="../examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Réclamations
+            <a class="nav-link " href="ajoutermessage.php">
+              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="triascreclam.php">
+              <i class="ni ni-key-25 text-info"></i> Tri ascendant des réclamations  
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link" href="tridescreclam.php">
+              <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
-          <li class="nav-item">
+           <li class="nav-item">
             <a class="nav-link" href="\website\frontoffice\Colo Shop\indextry.html">
               <i class="ni ni-shop text-green"></i> Ma boutique
             </a>
@@ -282,10 +275,9 @@ $reclams=$reclamd->afficherreclam();
               <h3 class="mb-0">Réclamations</h3>
             </div>
             <div class="table-responsive">
-              <a href="ajouterreclam.php">Ajouter réclamation </a>
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr>
+                <tr>
                     <th scope="col">CIN</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
@@ -294,7 +286,11 @@ $reclams=$reclamd->afficherreclam();
                     <th scope="col">Date_de_reclamation</th>
                     <th scope="col">Id_produit</th>
                     <th scope="col">Id_service</th>
+                    <th scope="col">Statut</th>
                     <th scope="col">Description</th>
+                    <th scope="col">chercher la disccussion relative</th>
+                    <th scope="col">modifier</th>
+                    <th scope="col">supprimer</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -303,27 +299,43 @@ $reclams=$reclamd->afficherreclam();
                   <?php 
                   foreach($reclams as $value){
                                       ?>
-                  <tr>
-                    <td> <?php echo $value["CIN"]; ?>  </td>
+                  <tr align="center">
+                    <th> <?php echo $value["CIN"]; ?>  </th>
                  
-                      <td> <?php echo $value["Nom"]; ?>  </td>
+                      <th> <?php echo $value["Nom"]; ?>  </th>
 
                     
-                      <td> <?php echo $value["Prenom"]; ?>   </td>
+                      <th> <?php echo $value["Prenom"]; ?>   </th>
 
                     
-                    <td>
+                    <th>
                         <?php echo $value["Email"]; ?> 
                      
-                    </td>
-                    <td> <?php echo $value["Num_tel"]; ?>  </td>
-                    <td> <?php echo $value["Date_de_reclamation"]; ?>  </td>
-                    <td> <?php echo $value["id_sujet"]; ?>  </td>
-                    <td> <?php echo $value["id_sujet2"]; ?>  </td>
-                    <td> <?php echo $value["Descriptionn"]; ?>  </td>
-                    <td> <a href="supprimerreclam.php?CIN=<?php echo $value['CIN']; ?>"><img src="stop.png" width='30px' height='30px'> </a> </td>
-                    <td> <a href="modifierreclam.php ?CIN=<?php echo $value['CIN']; ?>"> modifier </a>  </td>
-                    
+                    </th>
+                    <th> <?php echo $value["Num_tel"]; ?>  </th>
+                    <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
+                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="150px" height="150px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
+
+
+
+                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="150px" height="150px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
+                   
+                   
+                    <th> <?php echo $value["Statut"]; ?> 
+                    <?php if ($value["Statut"] =="traité") { ?> 
+                    <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:block">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none"> 
+<?php } else if ($value["Statut"] =="en cours de traitement") {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none">  
+  <?php } else {?>
+  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:block">  
+
+  <?php } ?> </th>
+  <th> <?php echo $value["Descriptionn"]; ?>  </th>
+
+                    <th> <a href="chercher_messages.php ?id_sujet=<?php echo $value['id_sujet'];?> & id_sujet2=<?php echo $value['id_sujet2'];?>"> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
+                 <th> <a href="modifierreclam.php ?CIN=<?php echo $value['CIN']; ?>">   <img src="./assets/modifier.png" width='30px' height='30px'></a>  </th>
+                    <th> <a href="supprimerreclam.php?CIN=<?php echo $value['CIN']; ?>">  <img src="./assets/supprimer.png" width='30px' height='30px'> </a> </th>
+
                   </tr>
                   <?php
 }

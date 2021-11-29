@@ -9,9 +9,11 @@ private $id_sujet;
 private $id_sujet2;
 private $Date_de_reclamation;
 private $Descriptionn;
+private $Statut;
 
 
-function __construct($cin,$nom,$prenom,$email,$num_tel,$id_sujet,$id_sujet2,$date_de_reclamation,$descriptionn){
+
+function __construct($cin,$nom,$prenom,$email,$num_tel,$id_sujet,$id_sujet2,$date_de_reclamation,$descriptionn,$statut){
 $this->CIN=$cin;
 $this->Nom=$nom;
 $this->Prenom=$prenom;
@@ -21,6 +23,8 @@ $this->id_sujet=$id_sujet;
 $this->id_sujet2=$id_sujet2;
 $this->Date_de_reclamation=$date_de_reclamation;
 $this->Descriptionn=$descriptionn;
+$this->Statut=$statut;
+
 
 }
 
@@ -51,6 +55,9 @@ function setDate_de_reclamation(string $Date_de_reclamation )
 function setDescriptionn(string $Descriptionn )
 {$this->Descriptionn=$Descriptionn;}
 
+function setStatut(string $Statut )
+{$this->Statut=$Statut;}
+
 
 function getCIN()
 {return $this->CIN;}
@@ -79,7 +86,8 @@ function getDate_de_reclamation()
 function getDescriptionn()
 {return $this->Descriptionn;}
 
-
+function getStatut()
+{return $this->Statut;}
 
 }
 

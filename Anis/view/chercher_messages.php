@@ -1,9 +1,10 @@
 <?php
-require '../controller/messageC.php';
+require '../controller/ReclamC.php';
 
-$messaged=new messagec();
-$messages=$messaged->affichermessage();
+$reclamd=new reclamc();
+$reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2']);
  
+
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +14,7 @@ $messages=$messaged->affichermessage();
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Eco-life.Tn
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -188,8 +188,6 @@ $messages=$messaged->affichermessage();
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item active active-pro">
-            <a class="nav-link" href="../examples/upgrade.html">
-              <i class="ni ni-send text-dark"></i> Upgrade to PRO
             </a>
           </li>
         </ul>
@@ -278,12 +276,20 @@ $messages=$messaged->affichermessage();
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                <tr>
-                    <th scope="col">CIN</th>
-                    <th scope="col">id produit</th>
-                    <th scope="col">id service</th>
+                <?php 
+                  foreach($reclams as $value){
+                                      ?>
+                                      Messagerie de <?php echo $value["CINM"]; ?>  ayant l'id produit =<?php echo $value["id_produit_message"]; ?> et l'id service =<?php echo $value["id_service_message"]; ?>                  <?php
+}
+?> </h5>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                  <th scope="col">CIN</th>
+                  <th scope="col">Message</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Message</th>
                     <th scope="col">modifier</th>
                     <th scope="col">supprimer</th>
                   </tr>
@@ -291,17 +297,17 @@ $messages=$messaged->affichermessage();
               
                 <tbody>
                   <?php 
-                  foreach($messages as $value){
+                  foreach($reclams as $value){
                                       ?>
                   <tr>
-                    <td> <?php echo $value["CINM"]; ?>  </td>
-                    <td> <?php echo $value["id_produit_message"]; ?>  </td>
-                    <td> <?php echo $value["id_service_message"]; ?>  </td>
+                  <td> <?php echo $value["CINM"]; ?>   </td>
+                  <td> <?php echo $value["messagee"]; ?>   </td>
                       <td> <?php echo $value["datee"]; ?>  </td>
-                      <td> <?php echo $value["messagee"]; ?>   </td>
+                 
 
-                      <td> <a href="modifiermessage.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
-                    <td> <a href="supprimermessage.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
+                      <td> <a href="modifiermessageclient.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'> </a>  </td>
+                    <td> <a href="supprimermessageclient.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
+                
                     
                   </tr>
                   <?php
@@ -316,13 +322,26 @@ $messages=$messaged->affichermessage();
         </div>
       </div>
 
+
+
+
+  
+
+          </div>
+                  
+                </tbody>
+              </table>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
       <!-- Footer -->
       <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
-                Tim</a>
             </div>
           </div>
           <div class="col-xl-6">

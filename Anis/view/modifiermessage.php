@@ -4,15 +4,15 @@ require_once '../Model/message.php';
 
 $messageV=new messagec();
 
-if (isset($_POST['CINM']) && isset($_POST['datee']) && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
 
 $messageV->modifiermessage($messagesaisie);
 
 header('Location:afficherListemessages.php');
 }else 
 {
-    $a=$messageV->getmessagebyid($_GET['CINM']);
+    $a=$messageV->getmessagebyid($_GET['datee']);
 }
 ?>
 
@@ -24,8 +24,7 @@ header('Location:afficherListemessages.php');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Eco-life.tn
-  </title>
+Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -46,7 +45,7 @@ header('Location:afficherListemessages.php');
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="../index.html">
-        <img src="./assets/img/brand/blue.png" class="navbar-brand-img"  alt="...">
+        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -134,33 +133,33 @@ header('Location:afficherListemessages.php');
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/icons.html">
-              <i class="ni ni-planet text-blue"></i> Icons
+            <a class="nav-link " href="afficherListemessages.php">
+              <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/maps.html">
-              <i class="ni ni-pin-3 text-orange"></i> Maps
+            <a class="nav-link active" href="afficherListeReclams.php">
+              <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active " href="../examples/profile.html">
+            <a class="nav-link   " href="ajouterreclam.php">
               <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../examples/tables.html">
-              <i class="ni ni-bullet-list-67 text-red"></i> Tables
+            <a class="nav-link " href="ajoutermessage.php">
+              <i class="ni ni-bullet-list-67 text-red"></i> ajouter message
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/login.html">
-              <i class="ni ni-key-25 text-info"></i> Login
+            <a class="nav-link" href="triascreclam.php">
+              <i class="ni ni-key-25 text-info"></i> Tri ascendant des réclamations  
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../examples/register.html">
-              <i class="ni ni-circle-08 text-pink"></i> Register
+            <a class="nav-link" href="tridescreclam.php">
+              <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
            <li class="nav-item">
@@ -174,202 +173,235 @@ header('Location:afficherListemessages.php');
             </a>
           </li>
         </ul>
-        <!-- Divider -->
-        <hr class="my-3">
-        <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Documentation</h6>
-        <!-- Navigation -->
-        <ul class="navbar-nav mb-md-3">
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-              <i class="ni ni-spaceship"></i> Getting started
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-              <i class="ni ni-palette"></i> Foundation
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-              <i class="ni ni-ui-04"></i> Components
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item active active-pro">
-            <a class="nav-link" href="../examples/upgrade.html">
-              <i class="ni ni-send text-dark"></i> Upgrade to PRO
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div class="main-content">
-    <!-- Navbar -->
-    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <div class="container-fluid">
-        <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Admin</a>
-        <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-              </div>
-              <input class="form-control" placeholder="Search" type="text">
+                <!-- Divider -->
+                <hr class="my-3">
+                <!-- Heading -->
+                <h6 class="navbar-heading text-muted">Documentation</h6>
+                <!-- Navigation -->
+                <ul class="navbar-nav mb-md-3">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+                            <i class="ni ni-spaceship"></i> Getting started
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
+                            <i class="ni ni-palette"></i> Foundation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
+                            <i class="ni ni-ui-04"></i> Components
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item active active-pro">
+                        <a class="nav-link" href="../examples/upgrade.html">
+                            <i class="ni ni-send text-dark"></i> Upgrade to PRO
+                        </a>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </form>
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                </span>
-               
-              </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class=" dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome!</h6>
-              </div>
-              <a href="../examples/profile.html" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
-              <a href="../examples/profile.html" class="dropdown-item">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>Settings</span>
-              </a>
-              <a href="../examples/profile.html" class="dropdown-item">
-                <i class="ni ni-calendar-grid-58"></i>
-                <span>Activity</span>
-              </a>
-              <a href="../examples/profile.html" class="dropdown-item">
-                <i class="ni ni-support-16"></i>
-                <span>Support</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#!" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- End Navbar -->
-    <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(./assets/img/theme/bff.png); background-size: cover; background-position: center top;">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default opacity-8"></span>
-      <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-          <div class="col-lg-7 col-md-10">
-            <h1 class="display-2 text-white">Modifier un message tant que Admin </h1>
-            <p class="text-white mt-0 mb-5">Service Messgerie</p>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- Page content -->
- 
+    </nav>
+    <div class="main-content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Admin</a>
+                <!-- Form -->
+                <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                    <div class="form-group mb-0">
+                        <div class="input-group input-group-alternative">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input class="form-control" placeholder="Search" type="text">
+                        </div>
+                    </div>
+                </form>
+                <!-- User -->
+                <ul class="navbar-nav align-items-center d-none d-md-flex">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <div class="media align-items-center">
+                                <span class="avatar avatar-sm rounded-circle">
+                                </span>
 
-      <div class="container-fluid mt--7">
-      
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-body">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome!</h6>
+                            </div>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>My profile</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-settings-gear-65"></i>
+                                <span>Settings</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-calendar-grid-58"></i>
+                                <span>Activity</span>
+                            </a>
+                            <a href="../examples/profile.html" class="dropdown-item">
+                                <i class="ni ni-support-16"></i>
+                                <span>Support</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#!" class="dropdown-item">
+                                <i class="ni ni-user-run"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <!-- Header -->
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+            style="min-height: 600px; background-image: url(./assets/img/theme/bff.png); background-size: cover; background-position: center top;">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-8"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        <h1 class="display-2 text-white">Modifier un message tant que Admin </h1>
+                        <p class="text-white mt-0 mb-5">Service Messgerie</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content -->
 
-              <form method="POST" action="" >
-                <h6 class="heading-small text-muted mb-4">Message</h6>
+
+        <div class="container-fluid mt--7">
+
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div class="card-body">
+                    <script src="message.js"></script>
+                    <form method="POST" action=""   onsubmit="return verifm();">
+                    <script src="message.js"></script>
+                <h6 class="heading-small text-muted mb-4">Messagerie de la réclamation dont l'id produit est <?php echo $a['id_produit_message'];?> et l'id service est <<?php echo $a['id_service_message'];?></h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="name" class="form-control-label">CIN:
+                        <label for="CINM" class="form-control-label">CIN: 
                         </label>
-                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CINM'];?>">
+                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['CINM'];?>" >
+                        <div id="msgDivcin" class="message" style='color:red'></div>
+
                         <br>
                       </div>
                     </div>
 
+                     
                     <div class="col-lg-6">
                       <div class="form-group">
-             <label for="name" class="form-control-label">Date:
+             <label for="datee" class="form-control-label">Date:
                    </label>
-                    <input type="date" id="datee"   class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
+                    <input type="datetime-local" id="datee"  class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
+            
                       </div>
                     </div>
-                  </div>
 
-                  <div class="row">
+                  <div class="col-md-6"> 
+                                              <div class="form-group">
+
+                                              <label for="name">
+                                                      </label>
+                                                      <input type="text" id="id_produit_message" class="form-control form-control-alternative" name="id_produit_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_produit_message'];?>" style="display:none">
+
+                                                    </div>
+
+                                              </div>
+
+                                              <div class="col-md-6">
+                                              <div class="form-group">
+
+                                              <label for="name">
+                                                      </label>
+                                                      <input type="text" id="id_service_message" class="form-control form-control-alternative" name="id_service_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_service_message'];?>" style="display:none">
+
+                                                </div>
+                                            </div>
+                
                     <div class="col-lg-6">
                       <div class="form-group">
-                <label for="name" class="form-control-label">message:
-                                   </label>
-                                   <input type="text" id="messagee" class="form-control" name="messagee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['messagee'];?>">
-                                              
+                <label for="message" class="form-control-label" name="messagee" >message:
+                            </label>
+                             <input  type="text" id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3"  row="100" size="10" Value="<?php echo $a['messagee'];?>">                                        
                       </div>
                     </div>
-                   
-			                	<div class="pl-lg-4">
+                    </div>
+
+				<div class="pl-lg-4">
                   <div class="form-group">
-				           <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" >
+				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verifm()" >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
               </form>
+              </div>
+
+                    </div>
+                </div>
             </div>
-          </div>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="row align-items-center justify-content-xl-between">
+                    <div class="col-xl-6">
+                        <div class="copyright text-center text-xl-left text-muted">
+                            &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1"
+                                target="_blank">Creative Tim</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.creative-tim.com/presentation" class="nav-link"
+                                    target="_blank">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
+                                    class="nav-link" target="_blank">MIT License</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </div>
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-          <div class="col-xl-6">
-            <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
-  <!--   Core   -->
-  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!--   Optional JS   -->
-  <!--   Argon JS   -->
-  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
-  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-  <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-dashboard-free"
-      });
-  </script>
+   
+    <!--   Core   -->
+    <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!--   Optional JS   -->
+    <!--   Argon JS   -->
+    <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+        window.TrackJS &&
+            TrackJS.install({
+                token: "ee6fab19c5a04ac1a32a645abde4613a",
+                application: "argon-dashboard-free"
+            });
+    </script>
 </body>
