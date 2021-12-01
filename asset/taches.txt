@@ -1,0 +1,21 @@
+connexion/inscription 
+publier une question :: publish-questions
+afficher les questions :: my-questions, j'ai un probleme d'affichage 
+modifier une question ::je dois avoir une modification des trois parametres(je dois le regler), edit-questions, pour modifier une question on met dans l'url ?id=valeur
+supprimer une question:: j'ai un probleme de suppression
+NB// tu dois avoir seulement accueil, publier mes questions,mes questions et deconnexion
+
+rechercher et afficher les questions ::avec showallquestionsaction
+repondre a une question :: article, showAllAnswersOfQuestionAction.php et postAnswerAction.php
+afficher le profil d'un utilisateur (avec ses publications)
+
+
+
+jai modifier l'id auteur par id au niveau de publishquestionaction
+je dois mettre la securityaction avant l'appel des autres fichiers
+j'ai un probleme avec:
+loginAction.php sur la ligne 26;
+signupAction.php sur la ligne 36;
+
+mettre ca au debut de publish-question, et edit-question ligne 1
+<?php require ('../controleur/securityAction.php'); ?>
