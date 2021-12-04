@@ -1,6 +1,7 @@
 
 <?php 
 session_start();
+require ('showOneUsersProfileAction.php');
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +34,10 @@ include('include/head.php');
         <li class="nav-item">
           <a class="nav-link" href="my-questions.php">Mes questions </a>
         </li>
+         
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>
+        </li>
                 <li class="nav-item">
           <a class="nav-link" href="logoout.php">Déconnexion</a>
         </li>
@@ -42,5 +47,62 @@ include('include/head.php');
     </div>
   </div>
 </nav>
+<br></br>
+
+<div class="container">
+
+<?php 
+
+if(isset($errormsg)){
+
+echo $errormsg;
+}
+
+if(isset($getisquestion)){
+  
+  ?>
+<div class="card">
+<div class="card-body">
+
+<h4><?= $user_pseudo ;?></h4>
+<br>
+
+<p><?= $user_nom.' '.$user_prenom ;?></p>
+
+
+</div>
+</div>
+  <br>
+  <?php
+
+  while($question = $getisquestion->fetch()){
+ ?>
+<div class="card">
+  <div class="card-header">
+  <?= $question['titre'] ; ?>
+  </div>
+<div class="card-body">
+<?= $question['description'] ; ?>
+</div>
+
+<div class="card-footer">
+Par  <?= $question['pseudo_auteur'] ; ?> le  <?= $question['date_publication'] ; ?>
+</div>
+
+</div>
+
+<br>
+    <?php
+  }
+
+  
+ 
+
+}
+
+
+
+?>
+</div>
 </body>
 </html>

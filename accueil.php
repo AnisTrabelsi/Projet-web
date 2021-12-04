@@ -31,6 +31,9 @@ require('showAllQuestionsAction.php');
         <li class="nav-item">
           <a class="nav-link" href="my-questions.php">Mes questions </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>
+        </li>
         <?php
 if(isset($_SESSION['auth']))
 {
@@ -98,8 +101,8 @@ while($question = $getAllQuestions->fetch()){
 
   </div>
 <div class="card-footer">
-Publié par
-<?php echo $question['pseudo_auteur'];  ?>
+Publié par <a href="profile.php?id=<?= $question['id_auteur']; ?>">
+<?php echo $question['pseudo_auteur'];  ?></a>
  le <?php echo $question['date_publication'];  ?>
 </div>
 
