@@ -1,8 +1,9 @@
 <?php
 require '../controller/ReclamC.php';
-
+session_start();
+$_SESSION['id']='00000000';
 $reclamd=new reclamc();
-$reclams=$reclamd->tri_reclamtion_descendant();
+$reclams=$reclamd->tri_reclamtion_descendant($_SESSION['id']);
  
 ?>
 <!DOCTYPE html>
@@ -301,7 +302,6 @@ $reclams=$reclamd->tri_reclamtion_descendant();
       </head>
       <script src="reclamation.js"></script>
       <body>
-          <div class="container">
           <div class="row">
 
         <div class="col">
@@ -313,12 +313,13 @@ $reclams=$reclamd->tri_reclamtion_descendant();
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                 <tr align="center">
+                <th scope="col">ID réclamation</th>
                     <th scope="col">CIN</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
                     <th scope="col">Email</th>
                     <th scope="col">Num_tel</th>
-                    <th scope="col">Date_de_reclamation</th>
+                    <th scope="col">Date de<br>reclamation</th>
                     <th scope="col">Id_produit</th>
                     <th scope="col">Id_service</th>
                     <th scope="col">Statut</th>
@@ -334,6 +335,8 @@ $reclams=$reclamd->tri_reclamtion_descendant();
                   foreach($reclams as $value){
                                       ?>
                   <tr align="center">
+                  <th> <?php echo $value["id_reclamation"]; ?>  </th>
+
                     <th> <?php echo $value["CIN"]; ?>  </th>
                  
                       <th> <?php echo $value["Nom"]; ?>  </th>
@@ -348,11 +351,11 @@ $reclams=$reclamd->tri_reclamtion_descendant();
                     </th>
                     <th> <?php echo $value["Num_tel"]; ?>  </th>
                     <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
-                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="150px" height="150px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
+                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="100px" height="100px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
 
 
 
-                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="150px" height="150px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
+                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="100px" height="100px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
                    
                    
                     <th> <?php echo $value["Statut"]; ?> 
@@ -365,29 +368,29 @@ $reclams=$reclamd->tri_reclamtion_descendant();
 
   <?php } ?> </th>
 
-                    <th> <a href="chercher_messages_client.php ?id_sujet=<?php echo $value['id_sujet'];?> & id_sujet2=<?php echo $value['id_sujet2'];?>"> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
+                    <th> <a href="chercher_messages_client.php ?id_reclamation=<?php echo $value['id_reclamation'];?> "> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
                
                    
                     <th>   <?php if ($value["Statut"] =="en cours de traitement")  { ?>  
-                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
+                           <a href="modifierreclamclient.php ?id_reclamation=<?php echo $value['id_reclamation']; ?> " style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
                     
                            <?php } else if ($value["Statut"] =="traité") { ?>  
-                           <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
+                           <a href="modifierreclamclient.php ?id_reclamation=<?php echo $value['id_reclamation']; ?> " style="display:none">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:none"></a> 
 
                            <?php } else  {?> 
-                            <a href="modifierreclamclient.php ?CIN=<?php echo $value['CIN']; ?>" style="display:block">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:block"></a> 
+                            <a href="modifierreclamclient.php ?id_reclamation=<?php echo $value['id_reclamation']; ?>" style="display:block">   <img src="./assets/modifier.png" width='30px' height='30px' style="display:block"></a> 
                             <?php } ?>
 
                     </th>
 
                     <th>    
                     <?php if ($value["Statut"] =="en cours de traitement")  {?>      
-                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+                    <a href="supprimerreclamclient.php?id_reclamation=<?php echo $value['id_reclamation']; ?> " style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
 
                     <?php } else if  ($value["Statut"] =="traité") {?>      
-                    <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
+                    <a href="supprimerreclamclient.php?id_reclamation=<?php echo $value['id_reclamation']; ?> " style="display:none">  <img src="./assets/supprimer.png" width='30px' height='30px'style="display:none"> </a> 
                     <?php } else  {?> 
-                        <a href="supprimerreclamclient.php?CIN=<?php echo $value['CIN']; ?>" style="display:block">  <img src="./assets/supprimer.png" width='30px' height='30px' style="display:block"> </a> 
+                        <a href="supprimerreclamclient.php?id_reclamation=<?php echo $value['id_reclamation']; ?> " style="display:block">  <img src="./assets/supprimer.png" width='30px' height='30px' style="display:block"> </a> 
                         <?php } ?>
 
                 </th>
@@ -407,6 +410,10 @@ $reclams=$reclamd->tri_reclamtion_descendant();
       </div>
 
 
+      <br>
+      <div class="container">
+
+       <a href="recu.php?CIN=<?php echo $value['CIN']; ?>" class="btn btn-primary" > Imprimer reçu </a>
 
 <br>
       <a href="triascreclamclient.php" class="btn btn-primary">Tri ascendant des réclamations </a> 
@@ -414,7 +421,6 @@ $reclams=$reclamd->tri_reclamtion_descendant();
 
               <br>
               <a href="ajouterreclamclient.php" class="btn btn-primary">Ajouter réclamation </a>
-              <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
           </div>
   

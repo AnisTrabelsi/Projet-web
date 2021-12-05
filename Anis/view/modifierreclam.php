@@ -1,6 +1,7 @@
 <?php
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
+include 'contactmodifier.php'; 
 
 $reclamV=new reclamc();
 
@@ -11,7 +12,7 @@ $reclamV->modifierreclam($reclamsaisie);
 header('Location:afficherListeReclams.php');
 }else 
 {
-    $a=$reclamV->getreclambyid($_GET['CIN']);
+    $a=$reclamV->getreclambyid($_GET['id_reclamation']);
 }
 ?>
 
@@ -414,7 +415,7 @@ Eco-life.tn  </title>
 
 				<div class="pl-lg-4">
                   <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+				<input type="submit" name="submit" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
         <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
@@ -423,6 +424,12 @@ Eco-life.tn  </title>
           </div>
         </div>
       </div>
+      <script type="text/javascript">
+        if(window.history.replaceState){
+window.history.replaceState(null,null,window.location.href);
+        }
+        </script>
+
       <!-- Footer -->
       <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">

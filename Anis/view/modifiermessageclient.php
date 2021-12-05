@@ -4,15 +4,15 @@ require_once '../Model/message.php';
 
 $messageV=new messagec();
 
-if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['id_reclamation_message']) &&isset($_POST['CINM']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['id_reclamation_message'],$_POST['CINM'],$_POST['datee'],$_POST['messagee']);
 
-$messageV->modifiermessage($messagesaisie);
+$messageV->modifiermessagea($messagesaisie);
 
-header('Location:afficherListemessagesclient.php');
+header('Location:afficherListeReclamspourclient.php');
 }else 
 {
-    $a=$messageV->getmessagebyid($_GET['datee']);
+    $a=$messageV->getmessagebyid($_GET['id_message']);
 }
 ?>
 
@@ -338,28 +338,21 @@ header('Location:afficherListemessagesclient.php');
   
                                                   </div>
                                               </div>
+
+                                              <div class="col-md-6"> 
+                                                      <label for="name">id_reclamation_message:
+                                                      </label>
+                                                      <input type="number" id="id_reclamation_message" class="form-control" name="id_reclamation_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_reclamation_message'];?>" >
+
+                                              </div>
+
                                               <div class="col-md-6"> 
                                                       <label for="name">Date:
                                                       </label>
                                                       <input type="datetime-local" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['datee'];?>">
 
                                               </div>
-                                              <div class="col-md-6"> 
-                                                      <label for="name">
-                                                      </label>
-                                                      <input type="text" id="id_produit_message" class="form-control" name="id_produit_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_produit_message'];?>" style="display:none">
-
-                                              </div>
-
-                                              <div class="col-md-6"> 
-                                                      <label for="name">
-                                                      </label>
-                                                      <input type="text" id="id_service_message" class="form-control" name="id_service_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_service_message'];?>" style="display:none">
-
-                                              </div>
-
-                                            
-  
+                           
   
                                               <div class="col-md-6"> 
                                                   <div class="form-group"><br>

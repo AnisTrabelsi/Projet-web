@@ -1,5 +1,8 @@
 <?php
 require '../controller/messageC.php';
+session_start();
+$_SESSION['id']='00000000';
+$_SESSION['id_admin']='11111111';
 
 $messaged=new messagec();
 $messages=$messaged->affichermessage();
@@ -278,10 +281,9 @@ $messages=$messaged->affichermessage();
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                <tr>
+                <tr  align="center">
                     <th scope="col">CIN</th>
-                    <th scope="col">id produit</th>
-                    <th scope="col">id service</th>
+                    <th scope="col">id de réclamation<br>relative</th>
                     <th scope="col">Date</th>
                     <th scope="col">Message</th>
                     <th scope="col">modifier</th>
@@ -293,15 +295,14 @@ $messages=$messaged->affichermessage();
                   <?php 
                   foreach($messages as $value){
                                       ?>
-                  <tr>
-                    <td> <?php echo $value["CINM"]; ?>  </td>
-                    <td> <?php echo $value["id_produit_message"]; ?>  </td>
-                    <td> <?php echo $value["id_service_message"]; ?>  </td>
-                      <td> <?php echo $value["datee"]; ?>  </td>
+                  <tr  align="center">
+                  <td>  <?php if ($value["CINM"]==$_SESSION["id_admin"]) { ?> <a> <img src="./assets/admin.png" width='50px' height='50px'></a> <?php } else echo $value["CINM"]; ?>  </td> 
+                  <td> <?php echo $value["id_reclamation_message"]; ?>  </td>    
+                  <td> <?php echo $value["datee"]; ?>  </td>
                       <td> <?php echo $value["messagee"]; ?>   </td>
 
-                      <td> <a href="modifiermessage.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
-                    <td> <a href="supprimermessage.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
+                      <td> <a href="modifiermessage.php ?id_message=<?php echo $value['id_message']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
+                    <td> <a href="supprimermessage.php?id_message=<?php echo $value['id_message']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
                     
                   </tr>
                   <?php

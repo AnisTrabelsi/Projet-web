@@ -1,8 +1,10 @@
 <?php
 require '../controller/ReclamC.php';
-
+session_start();
+$_SESSION['id']='00000000';
+$_SESSION['id_admin']='11111111';
 $reclamd=new reclamc();
-$reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2']);
+$reclams=$reclamd->chercher_message_par_id($_GET['id_reclamation']);
  
 
 ?>
@@ -14,7 +16,8 @@ $reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-Eco-life.tn  </title>
+    Eco-life.Tn
+  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -188,6 +191,8 @@ Eco-life.tn  </title>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item active active-pro">
+            <a class="nav-link" href="../examples/upgrade.html">
+              <i class="ni ni-send text-dark"></i> Upgrade to PRO
             </a>
           </li>
         </ul>
@@ -271,25 +276,15 @@ Eco-life.tn  </title>
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Messagerie</h3>
+              <h3 class="mb-0">Messagerie de l'ID réclamation Num°<?php echo $_GET['id_reclamation']; ?></h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                <?php 
-                  foreach($reclams as $value){
-                                      ?>
-                                      Messagerie de <?php echo $value["CINM"]; ?>  ayant l'id produit =<?php echo $value["id_produit_message"]; ?> et l'id service =<?php echo $value["id_service_message"]; ?>                  <?php
-}
-?> </h5>
-            </div>
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                  <th scope="col">CIN</th>
-                  <th scope="col">Message</th>
+                <tr  align="center">
+                    <th scope="col">CIN</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Message</th>
                     <th scope="col">modifier</th>
                     <th scope="col">supprimer</th>
                   </tr>
@@ -299,35 +294,19 @@ Eco-life.tn  </title>
                   <?php 
                   foreach($reclams as $value){
                                       ?>
-                  <tr>
-                  <td> <?php echo $value["CINM"]; ?>   </td>
-                  <td> <?php echo $value["messagee"]; ?>   </td>
-                      <td> <?php echo $value["datee"]; ?>  </td>
-                 
+                  <tr  align="center">
+                  <td>  <?php if ($value["CINM"]==$_SESSION["id_admin"]) { ?> <a> <img src="./assets/admin.png" width='50px' height='50px'></a> <?php } else echo $value["CINM"]; ?>  </td> 
+                  <td> <?php echo $value["datee"]; ?>  </td>
+                      <td> <?php echo $value["messagee"]; ?>   </td>
 
-                      <td> <a href="modifiermessageclient.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'> </a>  </td>
-                    <td> <a href="supprimermessageclient.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
-                
+                      <td> <a href="modifiermessage.php ?id_message=<?php echo $value['id_message']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
+                    <td> <a href="supprimermessage.php?id_message=<?php echo $value['id_message']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
                     
                   </tr>
                   <?php
 }
 ?>
-                  
-                </tbody>
-              </table>
-            </div>
-           
-          </div>
-        </div>
-      </div>
 
-
-
-
-  
-
-          </div>
                   
                 </tbody>
               </table>
@@ -342,6 +321,8 @@ Eco-life.tn  </title>
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+                Tim</a>
             </div>
           </div>
           <div class="col-xl-6">

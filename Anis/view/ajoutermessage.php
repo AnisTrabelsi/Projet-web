@@ -1,9 +1,10 @@
 <?php
 require_once '../controller/messageC.php';
 require_once '../Model/message.php';
-
-if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
+session_start();
+$_SESSION['id_admin']='11111111';
+if (isset($_POST['id_reclamation_message']) && isset($_POST['CINM']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['id_reclamation_message'],$_POST['CINM'],$_POST['datee'],$_POST['messagee']);
 $messagecc= new messagec();
 $messagecc->ajoutermessage($messagesaisie);
 header('Location:afficherListemessages.php');
@@ -287,54 +288,34 @@ Eco-life.tn  </title>
                       <div class="form-group">
                         <label for="CINM" class="form-control-label">CIN:
                         </label>
-                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10">
+                        <input type="number" id="CINM"  class="form-control form-control-alternative" name="CINM" required minlenght="3" maxlength="20" size="10" Value=<?php echo $_SESSION['id_admin'] ?>>
                         <div id="msgDivcin" class="message" style='color:red'></div>
 
                         <br>
                       </div>
                     </div>
 
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="id_reclamation_message" class="form-control-label">id_reclamation_message:
+                        </label>
+                        <input type="number" id="id_reclamation_message"  class="form-control form-control-alternative" name="id_reclamation_message" required minlenght="3" maxlength="20" size="10" >
+
+                        <br>
+                      </div>
+                    </div>
                      
                     <div class="col-lg-6">
                       <div class="form-group">
              <label for="Date" class="form-control-label">Date:
                    </label>
                     <input type="datetime-local" id="datee"  class="form-control form-control-alternative"  name="datee" required minlenght="3" maxlength="20" size="10">
-            
+                    <div id="msgDivdate" class="message" style='color:red'></div>
+
                       </div>
                     </div>
 
-                  <div class="col-md-6"> 
-                                              <div class="form-group">
-
-                                              <label for="id_produit_message" id="id_produit_message" > Produit:
-                                                    </label>
-                                                    <select name="id_produit_message" class="form-control form-control-alternative" >
-                                                        <option selected value="VIDE">choisissez votre id produit réclamé</option>
-                                                        <option value="001">Panneaux solaires</option>
-                                                        <option value="002">Helices</option>
-                                                        <option value="003">Moteur</option>
-
-                                                    </select>
-                                                    </div>
-
-                                              </div>
-
-                                              <div class="col-md-6">
-                                              <div class="form-group">
-
-                                                    <label for="id_service_message" id="id_service_message">Service:
-            </label>
-            <select name=" id_service_message" class="form-control form-control-alternative" >
-                                                        <option selected value="VIDE">choisissez votre id service réclamé
-                                                        </option>
-                                                        <option value="112">Réparation</option>
-                                                        <option value="111">Installation</option>
-                                                        <option value="110">Maintenance</option>
-
-                                                        </select>
-                                                </div>
-                                            </div>
+              
                 
                     <div class="col-lg-6">
                       <div class="form-group">

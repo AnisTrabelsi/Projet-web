@@ -7,4 +7,11 @@ function verifm() {
          }
 
 
+         var date= document.getElementById("datee").value;
+         var date1=new Date(date);
+         var date2=Date.now();
+         if (date2<date1){
+         document.getElementById("msgDivdate").innerHTML = "Vérifiez a date de message"; 
+         return false;
+        }
 }

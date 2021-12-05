@@ -1,12 +1,13 @@
 <?php
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
-
+include 'contact.php'; 
+session_start();
 if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description'])&& isset($_POST['Statut']))
 {$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description'],$_POST['Statut']);
 $reclamcc= new reclamc();
 $reclamcc->ajouterreclam($reclamsaisie);
- //header('Location:afficherListeReclams.php');
+// header('Location:afficherListeReclamspourclient.php');
 }
 ?>
 <!DOCTYPE html>
@@ -330,8 +331,8 @@ $reclamcc->ajouterreclam($reclamsaisie);
 
                                                         <label for="name">CIN:
                                                         </label>
-                                                        <input type="number" id="CIN" class="form-control" name="CIN"
-                                                            required minlenght="3" maxlength="20" size="10">
+                                                        <input type="number" id="CIN"  class="form-control" name="CIN"
+                                                            required minlenght="3" maxlength="20" size="10" value=<?php echo $_SESSION['id'] ?>>
                                                         <div id="msgDiv14" class="message" style='color:red'></div>
                                                         <div id="msgDiv152" class="message" style='color:red'></div>
                                                         <br>
@@ -452,7 +453,7 @@ $reclamcc->ajouterreclam($reclamsaisie);
                                             <div class="col-md-12">
 
 
-                                                <input type="submit" name="add" value="Envoyer" class="btn btn-primary">
+                                                <input type="submit" name="submit" value="Envoyer" class="btn btn-primary">
                                                 <input type="reset" value="Effacer" id="effacer"
                                                     class="btn btn-primary">
 
@@ -509,9 +510,13 @@ $reclamcc->ajouterreclam($reclamsaisie);
                 </div>
             </div>
             <br>
-            <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>
 
         </div>
+        <script type="text/javascript">
+        if(window.history.replaceState){
+window.history.replaceState(null,null,window.location.href);
+        }
+        </script>
 
     </body>
 

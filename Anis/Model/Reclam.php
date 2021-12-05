@@ -1,5 +1,6 @@
 <?php
 class reclam{
+private $id_reclamation;
 private $CIN;
 private $Nom;
 private $Prenom;
@@ -27,6 +28,8 @@ $this->Statut=$statut;
 
 
 }
+
+
 
 function setCIN(string $CIN)
 {$this->CIN=$CIN;}
@@ -57,6 +60,8 @@ function setDescriptionn(string $Descriptionn )
 
 function setStatut(string $Statut )
 {$this->Statut=$Statut;}
+
+
 
 
 function getCIN()

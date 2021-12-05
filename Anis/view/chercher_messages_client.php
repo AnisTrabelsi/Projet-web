@@ -1,12 +1,13 @@
 <?php
 require '../controller/ReclamC.php';
-
+session_start();
+$_SESSION['id']='00000000';
+$_SESSION['id_admin']='11111111';
 $reclamd=new reclamc();
-$reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2']);
+$reclams=$reclamd->chercher_message_par_id($_GET['id_reclamation']);
  
 
 ?>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -307,20 +308,15 @@ $reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h5 class="mb-1">    <?php 
-                  foreach($reclams as $value){
-                                      ?>
-                                      Messagerie de <?php echo $value["CINM"]; ?>  ayant l'id produit =<?php echo $value["id_produit_message"]; ?> et l'id service =<?php echo $value["id_service_message"]; ?>                  <?php
-}
-?> </h5>
+              <h3 class="mb-2">Messagerie de l'ID réclamation Num°<?php echo $_GET['id_reclamation']; ?></h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr>
-                  <th scope="col">CIN</th>
-                  <th scope="col">Message</th>
+                  <tr  align="center">
+                    <th scope="col">CIN</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Message</th>
                     <th scope="col">modifier</th>
                     <th scope="col">supprimer</th>
                   </tr>
@@ -330,15 +326,13 @@ $reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2
                   <?php 
                   foreach($reclams as $value){
                                       ?>
-                  <tr>
-                  <td> <?php echo $value["CINM"]; ?>   </td>
-                  <td> <?php echo $value["messagee"]; ?>   </td>
+                  <tr  align="center">
+                  <td>  <?php if ($value["CINM"]==$_SESSION["id_admin"]) { ?> <a> <img src="./assets/admin.png" width='50px' height='50px'></a> <?php } else echo $value["CINM"]; ?>  </td> 
                       <td> <?php echo $value["datee"]; ?>  </td>
-                 
+                      <td> <?php echo $value["messagee"]; ?>   </td>
 
-                      <td> <a href="modifiermessageclient.php ?datee=<?php echo $value['datee']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'> </a>  </td>
-                    <td> <a href="supprimermessageclient.php?datee=<?php echo $value['datee']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
-                
+                      <td> <a href="modifiermessageclient.php ?id_message=<?php echo $value['id_message']; ?> ">  <?php if ($value["CINM"]!=$_SESSION["id_admin"]) { ?> <img src="./assets/modifier.png" width='30px' height='30px'> <?php } ?></a>  </td>
+                    <td> <a href="supprimermessageclient.php?id_message=<?php echo $value['id_message']; ?>  "> <?php if ($value["CINM"]!=$_SESSION["id_admin"]) { ?> <img src="./assets/supprimer.png" width='30px' height='30px'> <?php } ?> </a> </td>
                     
                   </tr>
                   <?php
@@ -358,14 +352,14 @@ $reclams=$reclamd->chercher_message_par_sujet($_GET['id_sujet'],$_GET['id_sujet2
 
 
               <br>
+              <a href="ajouterrmessageclient.php" class="btn btn-primary">Ajouter message </a>
               <a href="afficherListeReclamspourclient.php" class="btn btn-primary">Consulter les réclamations</a>  
-              <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter tous les messages</a>  
 
           </div>
   
       </body>
   </html>
-  
+
   
     <!-- Contact Form End -->
 

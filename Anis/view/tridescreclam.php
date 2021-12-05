@@ -17,7 +17,7 @@ Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:230,400,600,700" rel="stylesheet">
   <!-- Icons -->
   <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -277,7 +277,8 @@ Eco-life.tn  </title>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                <tr>
+                <tr align="center">
+                <th scope="col">id_reclamation</th>
                     <th scope="col">CIN</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prenom</th>
@@ -288,7 +289,7 @@ Eco-life.tn  </title>
                     <th scope="col">Id_service</th>
                     <th scope="col">Statut</th>
                     <th scope="col">Description</th>
-                    <th scope="col">chercher la disccussion relative</th>
+                    <th scope="col">chercher <br>la disccussion <br> relative</th>
                     <th scope="col">modifier</th>
                     <th scope="col">supprimer</th>
                     <th scope="col"></th>
@@ -300,6 +301,9 @@ Eco-life.tn  </title>
                   foreach($reclams as $value){
                                       ?>
                   <tr align="center">
+                  
+                  <th> <?php echo $value["id_reclamation"]; ?>  </th>
+
                     <th> <?php echo $value["CIN"]; ?>  </th>
                  
                       <th> <?php echo $value["Nom"]; ?>  </th>
@@ -314,28 +318,27 @@ Eco-life.tn  </title>
                     </th>
                     <th> <?php echo $value["Num_tel"]; ?>  </th>
                     <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
-                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="150px" height="150px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
+                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="70px" height="70px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
 
 
 
-                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="150px" height="150px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
+                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="70px" height="70px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
                    
                    
                     <th> <?php echo $value["Statut"]; ?> 
                     <?php if ($value["Statut"] =="traité") { ?> 
-                    <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:block">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none"> 
+                    <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:block">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:none"> 
 <?php } else if ($value["Statut"] =="en cours de traitement") {?>
-  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:none">  
+  <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:none">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:none">  
   <?php } else {?>
-  <img src="./assets/traite.png" width='30px' height='30px' id="traite" style="display:none">  <img src="./assets/encours.png" width='30px' height='30px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='30px' height='30px' id="encours" style="display:block">  
+  <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:none">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:block">  
 
   <?php } ?> </th>
   <th> <?php echo $value["Descriptionn"]; ?>  </th>
 
-                    <th> <a href="chercher_messages.php ?id_sujet=<?php echo $value['id_sujet'];?> & id_sujet2=<?php echo $value['id_sujet2'];?>"> <img src="./assets/chercher.png" width='30px' height='30px'></a>  </th>
-                 <th> <a href="modifierreclam.php ?CIN=<?php echo $value['CIN']; ?>">   <img src="./assets/modifier.png" width='30px' height='30px'></a>  </th>
-                    <th> <a href="supprimerreclam.php?CIN=<?php echo $value['CIN']; ?>">  <img src="./assets/supprimer.png" width='30px' height='30px'> </a> </th>
-
+                    <th> <a href="chercher_messages.php ?id_reclamation=<?php echo $value['id_reclamation'];?> "> <img src="./assets/chercher.png" width='23px' height='23px'></a>  </th>
+                 <th> <a href="modifierreclam.php ?id_reclamation=<?php echo $value['id_reclamation']; ?> ">     <img src="./assets/modifier.png" width='23px' height='23px'></a>  </th>
+                    <th> <a href="supprimerreclam.php?id_reclamation=<?php echo $value['id_reclamation']; ?>">  <img src="./assets/supprimer.png" width='23px' height='23px'> </a> </th>
                   </tr>
                   <?php
 }

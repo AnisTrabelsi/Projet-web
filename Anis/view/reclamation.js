@@ -49,8 +49,8 @@ return false;
   return false;
 }
 
-    if (!email.includes('@esprit.tn'))  {
-    document.getElementById("msgDiv3").innerHTML = "Vérifier que votre mail est de type @esprit.tn "; 
+    if (!email.includes('@gmail.com'))  {
+    document.getElementById("msgDiv3").innerHTML = "Vérifier que votre mail est de type @gmail.com "; 
     return false;
 
   }
@@ -60,6 +60,15 @@ return false;
     return false;
      }
  
+
+     var date= document.getElementById("Date_de_reclamation").value;
+     var date1=new Date(date);
+     var date2=Date.now();
+     if (date2<date1){
+     document.getElementById("msgDiv6").innerHTML = "verifiez la date de réclamation "; 
+     return false;
+    }
+
 }
 
 

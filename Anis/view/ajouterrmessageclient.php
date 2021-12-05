@@ -1,12 +1,12 @@
 <?php
 require_once '../controller/messageC.php';
 require_once '../Model/message.php';
-
-if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
+session_start();
+if (isset($_POST['id_reclamation_message']) && isset($_POST['CINM'])  && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['id_reclamation_message'],$_POST['CINM'],$_POST['datee'],$_POST['messagee']);
 $messagecc= new messagec();
 $messagecc->ajoutermessage($messagesaisie);
-header('Location:afficherListemessagesclient.php');
+header('Location:afficherListeReclamspourclient.php');
 }
 ?>
 
@@ -323,14 +323,12 @@ header('Location:afficherListemessagesclient.php');
   
                                           <div class="col-md-6">
                                                   <div class="form-group">
-                                                  <fieldset width="2">
   
                                                       <label for="name">CIN:
                                                       </label>
-                                                      <input type="number" id="CINM" class="form-control" name="CINM" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="number" id="CINM" class="form-control" name="CINM" required minlenght="3" maxlength="20" size="10" Value=<?php echo $_SESSION['id'] ?> >
                                                       <div id="msgDivcin" class="message" style='color:red'></div>
 
-                                                      <br>
   
                                                   </div>
                                               </div>
@@ -338,62 +336,37 @@ header('Location:afficherListemessagesclient.php');
 
 
                                               <div class="col-md-6"> 
+                                                      <label for="name">id_reclamation_message:
+                                                      </label>
+                                                      <input type="number" id="id_reclamation_message" class="form-control" name="id_reclamation_message" required minlenght="3" maxlength="20" size="10">
+
+                                              </div>
+
+                                    
+
+                                            <div class="col-md-6"> 
+                                            <div class="form-group">
+
                                                       <label for="name">Date:
                                                       </label>
-                                                      <input type="datetime-local" id="datee" class="form-control" name="datee" required minlenght="3" maxlength="20" size="10">
+                                                      <input type="datetime-local" id="datee" class="form-control form-control-alternative" name="datee" required minlenght="3" maxlength="20" size="10">
+                                                      <div id="msgDivdate" class="message" style='color:red'></div>
 
                                               </div>
-
-
-                                              <div class="col-md-6"> 
-                                              <div class="form-group">
-
-                                              <label for="id_produit_message" id="id_produit_message">
-                                                    </label>
-                                                    <select name="id_produit_message">
-                                                        <option selected value="VIDE">choisissez votre id produit réclamé</option>
-                                                        <option value="001">Panneaux solaires</option>
-                                                        <option value="002">Helices</option>
-                                                        <option value="003">Moteur</option>
-
-                                                    </select>
-                                                    </div>
-
                                               </div>
-                                              <br>
 
-                                              <div class="col-md-6">
-                                              <div class="form-group">
-
-                                                    <label for="id_service_message" id="id_service_message">
-            </label>
-            <select name=" id_service_message">
-                                                        <option selected value="VIDE">choisissez votre id service réclamé
-                                                        </option>
-                                                        <option value="112">Réparation</option>
-                                                        <option value="111">Installation</option>
-                                                        <option value="110">Maintenance</option>
-
-                                                        </select>
-                                                </div>
-                                            </div>
-                                            <br>
-
-  
                                               <div class="col-md-6"> 
                                                   <div class="form-group">                                                     
                                                   <br>
 
                                                       <label for="name">message:
                                                       </label>
-                                                      <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="20" row="60" size="10"> </textarea>                                        
+                                                      <textarea id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3" maxlength="200" row="200" size="100"> </textarea>                                        
 
                                                   </div>
                                               </div>
   
   
-                                              
-              
                                                                                   
   
                                               <div class="col-md-12">

@@ -1,6 +1,7 @@
 <?php
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
+include 'contact.php'; 
 
 if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Description'])&& isset($_POST['Statut']))
 {$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Description'],$_POST['Statut']);
@@ -408,7 +409,7 @@ Eco-life.tn  </title>
                 </div>
 				<div class="pl-lg-4">
                   <div class="form-group">
-				<input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+				<input type="submit" name="submit" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
 													  </div>
                 </div>
@@ -417,6 +418,12 @@ Eco-life.tn  </title>
           </div>
         </div>
       </div>
+      <script type="text/javascript">
+        if(window.history.replaceState){
+window.history.replaceState(null,null,window.location.href);
+        }
+        </script>
+
       <!-- Footer -->
       <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">

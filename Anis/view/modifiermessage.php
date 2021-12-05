@@ -4,15 +4,15 @@ require_once '../Model/message.php';
 
 $messageV=new messagec();
 
-if (isset($_POST['CINM']) && isset($_POST['id_produit_message']) && isset($_POST['id_service_message']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
-{$messagesaisie= new message($_POST['CINM'],$_POST['id_produit_message'],$_POST['id_service_message'],$_POST['datee'],$_POST['messagee']);
+if (isset($_POST['id_reclamation_message']) &&isset($_POST['CINM']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
+{$messagesaisie= new message($_POST['id_reclamation_message'],$_POST['CINM'],$_POST['datee'],$_POST['messagee']);
 
-$messageV->modifiermessage($messagesaisie);
+$messageV->modifiermessagea($messagesaisie);
 
 header('Location:afficherListemessages.php');
 }else 
 {
-    $a=$messageV->getmessagebyid($_GET['datee']);
+  $a=$messageV->getmessagebyid($_GET['id_message']);
 }
 ?>
 
@@ -293,7 +293,7 @@ Eco-life.tn  </title>
                     <script src="message.js"></script>
                     <form method="POST" action=""   onsubmit="return verifm();">
                     <script src="message.js"></script>
-                <h6 class="heading-small text-muted mb-4">Messagerie de la réclamation dont l'id produit est <?php echo $a['id_produit_message'];?> et l'id service est <<?php echo $a['id_service_message'];?></h6>
+                <h6 class="heading-small text-muted mb-4">Messagerie de l'id réclamation :<?php echo $a['id_reclamation_message'];?> 
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
@@ -307,6 +307,7 @@ Eco-life.tn  </title>
                       </div>
                     </div>
 
+                    
                      
                     <div class="col-lg-6">
                       <div class="form-group">
@@ -317,27 +318,7 @@ Eco-life.tn  </title>
                       </div>
                     </div>
 
-                  <div class="col-md-6"> 
-                                              <div class="form-group">
-
-                                              <label for="name">
-                                                      </label>
-                                                      <input type="text" id="id_produit_message" class="form-control form-control-alternative" name="id_produit_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_produit_message'];?>" style="display:none">
-
-                                                    </div>
-
-                                              </div>
-
-                                              <div class="col-md-6">
-                                              <div class="form-group">
-
-                                              <label for="name">
-                                                      </label>
-                                                      <input type="text" id="id_service_message" class="form-control form-control-alternative" name="id_service_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_service_message'];?>" style="display:none">
-
-                                                </div>
-                                            </div>
-                
+       
                     <div class="col-lg-6">
                       <div class="form-group">
                 <label for="message" class="form-control-label" name="messagee" >message:
@@ -345,6 +326,16 @@ Eco-life.tn  </title>
                              <input  type="text" id="messagee"  name="messagee" class="form-control form-control-alternative" required minlenght="3"  row="100" size="10" Value="<?php echo $a['messagee'];?>">                                        
                       </div>
                     </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="id_reclamation_message" class="form-control-label">
+                        </label>
+                        <input type="number" id="id_reclamation_message"  class="form-control form-control-alternative" name="id_reclamation_message" required minlenght="3" maxlength="20" size="10" Value="<?php echo $a['id_reclamation_message'];?>" style="display:none">
+
+                        <br>
+                      </div>
                     </div>
 
 				<div class="pl-lg-4">

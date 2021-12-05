@@ -1,6 +1,7 @@
 <?php
 require_once '../controller/ReclamC.php';
 require_once '../Model/Reclam.php';
+include 'contactmodifier.php'; 
 
 $reclamV=new reclamc();
 
@@ -12,7 +13,7 @@ $reclamV->modifierreclam($reclamsaisie);
 header('Location:afficherListeReclamspourclient.php');
 }else 
 {
-    $a=$reclamV->getreclambyid($_GET['CIN']);
+    $a=$reclamV->getreclambyid($_GET['id_reclamation']);
 }
 ?>
 
@@ -438,7 +439,7 @@ header('Location:afficherListeReclamspourclient.php');
                                               <div class="col-md-12">
                                                   
                                               
-                                                      <input type="submit" name="add" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
+                                                      <input type="submit" name="submit" value="Envoyer"  class="btn btn-primary" onclick="verif()"  >
                                                       <input type="reset" value="Effacer" id="effacer" class="btn btn-primary" >
                                                       
                                               
@@ -491,6 +492,12 @@ header('Location:afficherListeReclamspourclient.php');
                       </div>
                   </div>
               </div>
+              <script type="text/javascript">
+        if(window.history.replaceState){
+window.history.replaceState(null,null,window.location.href);
+        }
+        </script>
+
               <br>
               <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
