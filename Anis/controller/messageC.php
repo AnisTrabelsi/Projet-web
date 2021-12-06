@@ -94,21 +94,21 @@ $querry->execute([
 
 
 
-function modifiermessagea($message)
+function modifiermessagea($message,$id_message)
 { 
     $config= config::getConnexion();
 
 try{
     $query=$config->prepare(
-'UPDATE message1 SET CINM=:CINM,messagee=:messagee
-where id_reclamation_message=:id_reclamation_message AND datee=:datee');
+'UPDATE message1 SET id_reclamation_message=:id_reclamation_message,CINM=:CINM,datee=:datee,messagee=:messagee
+where id_message=:id_message');
 
 $query->execute([ 
     'id_reclamation_message'=>$message->getid_reclamation_message(),
     'CINM'=>$message->getCINM(),
     'datee'=>$message->getdatee(),
-    'messagee'=>$message->getmessage()
-
+    'messagee'=>$message->getmessage(),
+     'id_message'=>$id_message
 ]); 
 }catch(PDOException $e){
     $e->getMessage();

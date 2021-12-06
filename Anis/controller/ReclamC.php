@@ -97,14 +97,14 @@ $querry->execute([
 
 
 
-function modifierreclam($reclam)
+function modifierreclam($reclam,$id_reclamation)
 { 
     $config= config::getConnexion();
 
 try{
     $query=$config->prepare(
-'UPDATE reclamation1 SET Nom=:Nom,Prenom=:Prenom,Email=:Email,Num_tel=:Num_tel,id_sujet=:id_sujet,id_sujet2=:id_sujet2,Descriptionn=:Descriptionn,Statut=:Statut
-where Date_de_reclamation=:Date_de_reclamation AND CIN=:CIN');
+'UPDATE reclamation1 SET CIN=:CIN,Nom=:Nom,Prenom=:Prenom,Email=:Email,Num_tel=:Num_tel,id_sujet=:id_sujet,id_sujet2=:id_sujet2, Date_de_reclamation=:Date_de_reclamation,Descriptionn=:Descriptionn,Statut=:Statut
+where id_reclamation=:id_reclamation ');
 
 $query->execute([ 
     'CIN'=>$reclam->getCIN(),
@@ -116,8 +116,8 @@ $query->execute([
    'id_sujet2'=>$reclam->getid_sujet2(),
    'Date_de_reclamation'=>$reclam->getDate_de_reclamation(),
    'Descriptionn'=>$reclam->getDescriptionn(),
-   'Statut'=>$reclam->getStatut()
-
+   'Statut'=>$reclam->getStatut(),
+   'id_reclamation'=>$id_reclamation
 ]); 
 }catch(PDOException $e){
     $e->getMessage();

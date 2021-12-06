@@ -7,7 +7,7 @@ $reclamV=new reclamc();
 
 if (isset($_POST['CIN']) && isset($_POST['Nom']) && isset($_POST['Prenom']) && isset($_POST['Email']) && isset($_POST['Num_tel'])&& isset($_POST['id_sujet'])&& isset($_POST['id_sujet2'])&& isset($_POST['Date_de_reclamation'])&& isset($_POST['Descriptionn'])&& isset($_POST['Statut']))
 {$reclamsaisie= new reclam($_POST['CIN'],$_POST['Nom'],$_POST['Prenom'],$_POST['Email'],$_POST['Num_tel'],$_POST['id_sujet'],$_POST['id_sujet2'],$_POST['Date_de_reclamation'],$_POST['Descriptionn'],$_POST['Statut']);
-$reclamV->modifierreclam($reclamsaisie);
+$reclamV->modifierreclam($reclamsaisie,$_GET['id_reclamation']));
 
 header('Location:afficherListeReclams.php');
 }else 

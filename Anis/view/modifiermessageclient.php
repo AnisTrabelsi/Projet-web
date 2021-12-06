@@ -7,7 +7,7 @@ $messageV=new messagec();
 if (isset($_POST['id_reclamation_message']) &&isset($_POST['CINM']) && isset($_POST['datee'])  && isset($_POST['messagee']) )
 {$messagesaisie= new message($_POST['id_reclamation_message'],$_POST['CINM'],$_POST['datee'],$_POST['messagee']);
 
-$messageV->modifiermessagea($messagesaisie);
+$messageV->modifiermessagea($messagesaisie,$_GET['id_message']);
 
 header('Location:afficherListeReclamspourclient.php');
 }else 
