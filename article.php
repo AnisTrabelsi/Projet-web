@@ -61,7 +61,7 @@ echo $errormsg;
 <p><?= $question_content ;?></p>
 <hr>
 
-<small><?= $question_pseudo_author .' '.  $question_date_publication; ?></small>
+<small><?= '<a href="profile.php?id='.$question_id_author.'">'.$question_pseudo_author .' </a>'.  $question_date_publication; ?></small>
      </section>
   </br>
 <section class="show-answers">
@@ -81,8 +81,8 @@ while($answer = $getAllAnswersOfThisQuestion->fetch()){
 
 <div class="card">
 <div class="card-header">
-<?= $answer['pseudo_auteur'];?>
-
+ <a href="profile.php?id=<?= $answer['id_auteur'];?>"><?= $answer['pseudo_auteur'];?>
+</a>
 </div>
 <div class="card-body">
 

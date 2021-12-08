@@ -1,8 +1,10 @@
 
 <?php
 
-require('controleur/securityAction.php'); 
-require('myQuestionAction.php');
+require('../controleur/securityAction.php'); 
+require('../controleur/controleur_question.php');
+$questionC=new question_Control();
+$question=$questionC->afficher_question(); 
 
  ?>
 
@@ -10,7 +12,7 @@ require('myQuestionAction.php');
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include 'include/head.php'; ?>
+<?php include '../include/head.php'; ?>
 
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +20,7 @@ require('myQuestionAction.php');
       
     
       
-  <img src= 'asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
+  <img src= '../asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
     >Forum</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,10 +28,10 @@ require('myQuestionAction.php');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link "  href="accueil.php">Accueil</a>
+          <a class="nav-link "  href="../accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="view/publish-question.php">Publier une question </a>
+          <a class="nav-link" href="publish-question.php">Publier une question </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="my-questions.php">Mes questions </a>
@@ -54,7 +56,7 @@ require('myQuestionAction.php');
 <?php 
 
 
-while($question = $getallmyquestions->fetch())
+while($question as $questionM)
 {
     
     ?>

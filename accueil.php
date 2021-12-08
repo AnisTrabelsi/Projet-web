@@ -29,7 +29,7 @@ require('showAllQuestionsAction.php');
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="my-questions.php">Mes questions </a>
+          <a class="nav-link" href="view/my-questions.php">Mes questions </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>

@@ -2,7 +2,9 @@
 <?php 
 
 
-require ('view/loginAction.php') ; ?>
+require ('../controleur/loginAction.php') ; 
+
+?>
 
 
 <!DOCTYPE html>
@@ -11,7 +13,7 @@ require ('view/loginAction.php') ; ?>
 <html lang="en">
     <?php 
     
-    include 'include/head.php';
+    include '../include/head.php';
     
     ?>
 

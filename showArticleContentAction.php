@@ -23,6 +23,7 @@ if(isset($_GET['id']) AND !empty($_GET['id'])){
         $question_id_author = $questionsInfos['id_auteur'];
         $question_pseudo_author = $questionsInfos['pseudo_auteur'];
         $question_date_publication = $questionsInfos['date_publication'];
+        
     }else{
 
 
