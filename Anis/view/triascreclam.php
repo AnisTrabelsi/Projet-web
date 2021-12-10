@@ -2,7 +2,7 @@
 require '../controller/ReclamC.php';
 
 $reclamd=new reclamc();
-$reclams=$reclamd->tri_reclamtion_ascendant();
+$reclams=$reclamd->tri_reclamtion_ascendantadmin();
  
 ?>
 

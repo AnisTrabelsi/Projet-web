@@ -16,6 +16,7 @@ class reclamc{
         $e->getMesssage();
         }}
 
+
 function afficherreclamclient($id){
 $requete="select * from reclamation1 where CIN=:id";
 $config= config::getConnexion();
@@ -168,6 +169,36 @@ function chercher_message_par_id($id_reclamation){
         {
         $e->getMesssage();
         }}
+
+
+        function tri_reclamtion_ascendantadmin(){
+            $requete="select * from reclamation1  ORDER BY date_de_reclamation ASC";
+            $config= config::getConnexion();
+            try{
+            $query=$config->prepare($requete);
+            $query->execute( 
+            );
+            $result=$query->fetchAll();
+            return $result;
+            }catch (PDOException $e)
+            {
+            $e->getMesssage();
+            }}
+          
+    
+        function tri_reclamtion_descendantadmin(){
+            $requete="select * from reclamation1 ORDER BY date_de_reclamation DESC";
+            $config= config::getConnexion();
+            try{
+            $query=$config->prepare($requete);
+            $query->execute( 
+            );
+            $result=$query->fetchAll();
+            return $result;
+            }catch (PDOException $e)
+            {
+            $e->getMesssage();
+            }}
       
 
 

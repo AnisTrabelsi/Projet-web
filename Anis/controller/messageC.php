@@ -15,24 +15,6 @@ class messagec{
         $e->getMesssage();
         }}
 
-/*function affichermessageclient($id1,$id2){
-$requete="select * from message1 where CINM=:id1 AND CINM=:id2  ORDER BY datee ASC";
-$config= config::getConnexion();
-try{
-$query=$config->prepare($requete);
-$query->execute(
-['id1'=>$id1,
-'id2'=>$id2
-
-]
-
-);
-$result=$query->fetchAll();
-return $result;
-}catch (PDOException $e)
-{
-$e->getMesssage();
-}}*/
 
 function getmessagebyid($id){
     $requete="select * from message1 where id_message=:id  ";

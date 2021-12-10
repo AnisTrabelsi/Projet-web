@@ -1,9 +1,14 @@
 <?php
 require '../controller/ReclamC.php';
 
+session_start();
+$_SESSION['id']='00000000';
+$_SESSION['id_admin']='11111111';
+
 $reclamd=new reclamc();
-$reclams=$reclamd->tri_reclamtion_descendantadmin();
+$reclams=$reclamd->chercher_message_par_id($_POST['search_id_reclamation']);
  
+
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +18,12 @@ $reclams=$reclamd->tri_reclamtion_descendantadmin();
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-Eco-life.tn  </title>
+    Eco-life.Tn
+  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:230,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
   <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -122,17 +128,17 @@ Eco-life.tn  </title>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="afficherListemessages.php">
+            <a class="nav-link active " href="afficherListemessages.php">
               <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="afficherListeReclams.php">
+            <a class="nav-link " href="afficherListeReclams.php">
               <i class="ni ni-pin-3 text-orange"></i> Consulter les réclamations
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link   " href="ajouterreclam.php">
+            <a class="nav-link  " href="ajouterreclam.php">
               <i class="ni ni-single-02 text-yellow"></i> Ajouter une réclamation
             </a>
           </li>
@@ -202,13 +208,13 @@ Eco-life.tn  </title>
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="../index.html">Tables</a>
         <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto"method="POST" action="rechercher_message_admin_par_id_reclam.php">
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
               </div>
-              <input class="form-control" placeholder="Search" type="text">
+              <input class="form-control" placeholder="Search ID reclamation"  type="number">
             </div>
           </div>
         </form>
@@ -272,27 +278,18 @@ Eco-life.tn  </title>
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <h3 class="mb-0">Réclamations</h3>
+              <h3 class="mb-0">Messagerie</h3>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                <tr align="center">
-                <th scope="col">id_reclamation</th>
+                <tr  align="center">
                     <th scope="col">CIN</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prenom</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Num_tel</th>
-                    <th scope="col">Date_de_reclamation</th>
-                    <th scope="col">Id_produit</th>
-                    <th scope="col">Id_service</th>
-                    <th scope="col">Statut</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">chercher <br>la disccussion <br> relative</th>
+                    <th scope="col">id de réclamation<br>relative</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Message</th>
                     <th scope="col">modifier</th>
                     <th scope="col">supprimer</th>
-                    <th scope="col"></th>
                   </tr>
                 </thead>
               
@@ -300,45 +297,15 @@ Eco-life.tn  </title>
                   <?php 
                   foreach($reclams as $value){
                                       ?>
-                  <tr align="center">
-                  
-                  <th> <?php echo $value["id_reclamation"]; ?>  </th>
+                  <tr  align="center">
+                  <td>  <?php if ($value["CINM"]==$_SESSION["id_admin"]) { ?> <a> <img src="./assets/admin.png" width='50px' height='50px'></a> <?php } else echo $value["CINM"]; ?>  </td> 
+                  <td> <?php echo $value["id_reclamation_message"]; ?>  </td>    
+                  <td> <?php echo $value["datee"]; ?>  </td>
+                      <td> <?php echo $value["messagee"]; ?>   </td>
 
-                    <th> <?php echo $value["CIN"]; ?>  </th>
-                 
-                      <th> <?php echo $value["Nom"]; ?>  </th>
-
+                      <td> <a href="modifiermessage.php ?id_message=<?php echo $value['id_message']; ?>"> <img src="./assets/modifier.png" width='30px' height='30px'></a>  </td>
+                    <td> <a href="supprimermessage.php?id_message=<?php echo $value['id_message']; ?>"><img src="./assets/supprimer.png" width='30px' height='30px'> </a> </td>
                     
-                      <th> <?php echo $value["Prenom"]; ?>   </th>
-
-                    
-                    <th>
-                        <?php echo $value["Email"]; ?> 
-                     
-                    </th>
-                    <th> <?php echo $value["Num_tel"]; ?>  </th>
-                    <th> <?php echo $value["Date_de_reclamation"]; ?>  </th>
-                    <th>  <?php if ($value["id_sujet"]!="VIDE") {?> <input type="image" id="id_sujet" name="id_sujet" src="<?php echo ("./assets/".$value["id_sujet"].".png");?>" width="70px" height="70px" > <?php } ?>  <br>   <?php echo $value["id_sujet"]; ?> </th>           
-
-
-
-                    <th>   <?php if ($value["id_sujet2"]!="VIDE") {?> <input type="image" id="id_sujet2" name="id_sujet2" src="<?php echo ("./assets/".$value["id_sujet2"].".png");?>" width="70px" height="70px" value="<?php echo ($value["id_sujet2"]);?>">  <?php } ?>  <br>  <?php echo $value["id_sujet2"]; ?></th>           
-                   
-                   
-                    <th> <?php echo $value["Statut"]; ?> 
-                    <?php if ($value["Statut"] =="traité") { ?> 
-                    <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:block">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:none">   <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:none"> 
-<?php } else if ($value["Statut"] =="en cours de traitement") {?>
-  <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:none">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:block"> <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:none">  
-  <?php } else {?>
-  <img src="./assets/traite.png" width='23px' height='23px' id="traite" style="display:none">  <img src="./assets/encours.png" width='23px' height='23px' id="encours" style="display:none"> <img src="./assets/pastraite.png" width='23px' height='23px' id="encours" style="display:block">  
-
-  <?php } ?> </th>
-  <th> <?php echo $value["Descriptionn"]; ?>  </th>
-
-                    <th> <a href="chercher_messages.php ?id_reclamation=<?php echo $value['id_reclamation'];?> "> <img src="./assets/chercher.png" width='23px' height='23px'></a>  </th>
-                 <th> <a href="modifierreclam.php ?id_reclamation=<?php echo $value['id_reclamation']; ?> ">     <img src="./assets/modifier.png" width='23px' height='23px'></a>  </th>
-                    <th> <a href="supprimerreclam.php?id_reclamation=<?php echo $value['id_reclamation']; ?>">  <img src="./assets/supprimer.png" width='23px' height='23px'> </a> </th>
                   </tr>
                   <?php
 }
