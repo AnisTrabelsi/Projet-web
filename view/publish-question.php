@@ -1,9 +1,8 @@
 
 
 <?php 
-
-
-session_start();
+require_once('../modele/modele_question.php');
+require_once('../controleur/controleur_question.php');
 
 if(!isset($_SESSION['auth'])){
 
@@ -11,8 +10,8 @@ header('Location:login.php');
 
 }
 
-require_once('../modele/modele_question.php');
-require_once('../controleur/controleur_question.php');
+
+
 
 //create a question
 $questionM= null;

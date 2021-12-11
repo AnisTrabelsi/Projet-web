@@ -1,22 +1,78 @@
 
 
 <?php  
-session_start();
-require('showArticleContentAction.php');
-require('postAnswerAction.php');
-require('showAllAnswersOfQuestionAction.php');
+
+require_once('../modele/modele_answer.php');
+require_once('../controleur/controleur_question.php');
+$answerM=null;
+$questionC= new question_Control();
+//vérifier si l'id de la question est rentrée dans l'url
+ if(isset($_GET['id']) AND !empty($_GET['id'])){
+
+  //recuperer l'id de la question 
+  $idOfTheQuestion = $_GET['id'];
+  
+
+  
+  $checkIfQuestionExists=$questionC->showArticleContentAction($idOfTheQuestion);
+ 
+  //verifier si la question existe
+  if($checkIfQuestionExists->rowCount() > 0){
+  
+      //recuperer toutes les dates de la question 
+      $questionsInfos = $checkIfQuestionExists->fetch();
+      
+      //stocker les dates de la question dans des variables propres
+      $question_title = $questionsInfos['titre'];
+      $question_content = $questionsInfos['contenu'];
+      $question_id_author = $questionsInfos['id_auteur'];
+      $question_pseudo_author = $questionsInfos['pseudo_auteur'];
+      $question_date_publication = $questionsInfos['date_publication'];
+      
+  }else{
+
+
+      $errormsg= "Aucune question n'a été trouvée";
+
+  }
+}else{
+
+  $errormsg="aucune question n'a été trouvée";
+
+}
+
+if(isset($_POST['signup']))
+{
+
+if(!empty($_POST['answer'])){
+
+$user_answer = nl2br(htmlspecialchars($_POST['answer']));
+
+$answerM= new answer_Model($_SESSION['id'],
+ $_SESSION['pseudo'], 
+ $_GET['id'], 
+ $user_answer);
+$questionC->postAnswerAction($answerM);
+
+}
+
+
+}
+
+$getAllAnswersOfThisQuestion=$questionC->showAllAnswersOfQuestionAction($_SESSION['id']);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <?php require ('include/head.php'); ?>
+    <?php require ('../include/head.php'); ?>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
       
     
       
-  <img src= 'asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
+  <img src= '../asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
     >Forum</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -27,14 +83,18 @@ require('showAllAnswersOfQuestionAction.php');
           <a class="nav-link "  href="accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="view/publish-question.php">Publier une question </a>
+          <a class="nav-link" href="publish-question.php">Publier une question </a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" href="my-questions.php">Mes questions </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>
+        </li>
+        
                 <li class="nav-item">
-          <a class="nav-link" href="logoout.php">Déconnexion</a>
+          <a class="nav-link" href="../controleur/logoout.php">Déconnexion</a>
         </li>
         
       </ul>

@@ -1,14 +1,51 @@
 
 <?php 
-session_start();
-require ('showOneUsersProfileAction.php');
+require_once('../modele/modele_question.php');
+require_once('../controleur/controleur_question.php');
+$questionC= new question_Control();
+//recuperer l'id de l'user
+
+if(isset($_GET['id']) AND !empty($_GET['id'])){
+
+    //l'id de l'user
+$idOfUser = $_GET['id']; 
+
+//verifier si il existe
+
+$checkIfUserExists=$questionC->show_user($idOfUser);
+
+if($checkIfUserExists->rowCount() > 0){
+//recuperer toutes les donnees de l'user
+$usersInfos = $checkIfUserExists->fetch();
+
+$user_pseudo = $usersInfos['pseudo'];
+$user_nom= $usersInfos['nom'];
+$user_prenom = $usersInfos['prenom'];
+ 
+//recuperer toutes les questions publiées par l'user
+$getisquestion = $questionC->show_question($idOfUser);
+
+
+}else{
+
+    $errormsg= "aucun utilisateur trouvé";
+
+}
+
+}else{
+
+$errormsg= "aucun utilisateur trouvé";
+
+
+}
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php 
-include('include/head.php');
+include('../include/head.php');
 ?>
 
 <body>
@@ -17,7 +54,7 @@ include('include/head.php');
       
     
       
-  <img src= 'asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href=""   
+  <img src= '../asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href=""   
     >Forum</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,7 +65,7 @@ include('include/head.php');
           <a class="nav-link "  href="accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="view/publish-question.php">Publier une question </a>
+          <a class="nav-link" href="publish-question.php">Publier une question </a>
         </li>
 
         <li class="nav-item">
@@ -39,7 +76,7 @@ include('include/head.php');
           <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>
         </li>
                 <li class="nav-item">
-          <a class="nav-link" href="logoout.php">Déconnexion</a>
+          <a class="nav-link" href="../controleur/logoout.php">Déconnexion</a>
         </li>
         
       </ul>

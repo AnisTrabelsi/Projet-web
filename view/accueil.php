@@ -1,12 +1,18 @@
 
 <?php
-session_start();
-require('showAllQuestionsAction.php');
+
+require_once('../controleur/controleur_question.php');
+
+$questionC= new question_Control();
+
+
+$listequestion=$questionC->afficher_search_question();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php require 'include/head.php';?>
+<?php require '../include/head.php';?>
 
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -14,7 +20,7 @@ require('showAllQuestionsAction.php');
       
     
       
-  <img src= 'asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
+  <img src= '../asset/img/logo.png' width='30px'/>   <a class="navbar-brand" href="#"   
     >Forum</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,11 +31,11 @@ require('showAllQuestionsAction.php');
           <a class="nav-link "  href="accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="view/publish-question.php">Publier une question </a>
+          <a class="nav-link" href="publish-question.php">Publier une question </a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="view/my-questions.php">Mes questions </a>
+          <a class="nav-link" href="my-questions.php">Mes questions </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="profile.php?id=<?= $_SESSION['id']; ?>">Mon profile</a>
@@ -39,7 +45,7 @@ if(isset($_SESSION['auth']))
 {
     ?>
 <li class="nav-item">
-          <a class="nav-link" href="logoout.php">Déconnexion</a>
+          <a class="nav-link" href="../controleur/logoout.php">Déconnexion</a>
         </li>
     <?php
 }
@@ -84,7 +90,7 @@ if(isset($_SESSION['auth']))
 <?php
 
 
-while($question = $getAllQuestions->fetch()){
+while($question = $listequestion->fetch()){
 
   ?>
 

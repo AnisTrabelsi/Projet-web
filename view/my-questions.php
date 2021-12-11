@@ -1,10 +1,10 @@
 
 <?php
 
-require('../controleur/securityAction.php'); 
-require('../controleur/controleur_question.php');
+
+require_once('../controleur/controleur_question.php');
 $questionC=new question_Control();
-$question=$questionC->afficher_question(); 
+$listequestion=$questionC->afficher_question(); 
 
  ?>
 
@@ -28,7 +28,7 @@ $question=$questionC->afficher_question();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link "  href="../accueil.php">Accueil</a>
+          <a class="nav-link "  href="accueil.php">Accueil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="publish-question.php">Publier une question </a>
@@ -42,7 +42,7 @@ $question=$questionC->afficher_question();
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="logoout.php">Déconnexion</a>
+          <a class="nav-link" href="../controleur/logoout.php">Déconnexion</a>
         </li>
         
       </ul>
@@ -56,7 +56,7 @@ $question=$questionC->afficher_question();
 <?php 
 
 
-while($question as $questionM)
+while($question = $listequestion->fetch())
 {
     
     ?>
@@ -79,11 +79,13 @@ while($question as $questionM)
     
       
       <p class="card-text">
-          
+      La description: 
       <?= $question['description'];  ?>
-      <?= $question['contenu'];  ?>
+       
+      <br>
     
     </p>
+    <p>Le contenu : <?= $question['contenu'];  ?></p>
     <a href="article.php?id=<?= $question['id']; ?>" class="btn btn-primary">Acceder à la question</a>
     <a href="edit-questions.php?id=<?= $question['id'];?>" class="btn btn-warning">Modifier l'article</a>
     <a href="deleteQuestionAction.php?id=<?= $question['id'];?>" class="btn btn-danger">Supprimer l'article</a>
