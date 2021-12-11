@@ -499,7 +499,6 @@ window.history.replaceState(null,null,window.location.href);
         </script>
 
               <br>
-              <a href="afficherListemessagesclient.php" class="btn btn-primary">Consulter les messages</a>  
 
           </div>
   

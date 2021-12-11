@@ -3,7 +3,6 @@ require '../controller/ReclamC.php';
 
 $reclamd=new reclamc();
 $reclams=$reclamd->afficherreclam();
- 
 ?>
 
 <!DOCTYPE html>
@@ -224,7 +223,7 @@ Eco-life.tn  </title>
                   <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">Anis Trabelsi</span>
+                  <span class="mb-0 text-sm  font-weight-bold">ADMIN</span>
                 </div>
               </div>
             </a>
@@ -263,6 +262,8 @@ Eco-life.tn  </title>
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
         <div class="header-body">
+
+      
           <!-- Card stats -->
 
         </div>
@@ -345,7 +346,8 @@ Eco-life.tn  </title>
                   <?php
 }
 ?>
-                  
+          
+
                 </tbody>
               </table>
             </div>
@@ -359,24 +361,23 @@ Eco-life.tn  </title>
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
             <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
-                Tim</a>
+              &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank"></a>
             </div>
           </div>
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                <a href="https://www.creative-tim.com" class="nav-link" target="_blank"></a>
               </li>
               <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank"></a>
               </li>
               <li class="nav-item">
-                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank"></a>
               </li>
               <li class="nav-item">
                 <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link"
-                  target="_blank">MIT License</a>
+                  target="_blank"></a>
               </li>
             </ul>
           </div>
