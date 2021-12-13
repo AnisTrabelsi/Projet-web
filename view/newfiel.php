@@ -9,33 +9,18 @@ $questionC= new question_Control();
 if(isset($_GET['id']) AND !empty($_GET['id'])){
 
     //l'id de l'user
-$idOfUser = $_GET['id']; 
+$idcat = $_GET['id']; 
 
 //verifier si il existe
 
-$checkIfUserExists=$questionC->show_user($idOfUser);
+$check=$questionC->show_cat($idcat);
 
-if($checkIfUserExists->rowCount() > 0){
+
 //recuperer toutes les donnees de l'user
-$usersInfos = $checkIfUserExists->fetch();
-
-$user_pseudo = $usersInfos['pseudo'];
-$user_nom= $usersInfos['nom'];
-$user_prenom = $usersInfos['prenom'];
+$catInfos = $checkIfUserExists->fetch();
  
 //recuperer toutes les questions publiées par l'user
-$getisquestion = $questionC->show_question($idOfUser);
-
-
-}else{
-
-    $errormsg= "aucun utilisateur trouvé";
-
-}
-
-}else{
-
-$errormsg= "aucun utilisateur trouvé";
+$getisquestion = $questionC->show_question($idcat);
 
 
 }
@@ -91,26 +76,11 @@ include('../include/head.php');
 
 <?php 
 
-if(isset($errormsg)){
-
-echo $errormsg;
-}
 
 if(isset($getisquestion)){
   
   ?>
-<div class="card">
-<div class="card-body">
 
-<h4><?= $user_pseudo ;?></h4>
-<br>
-
-<p><?= $user_nom.' '.$user_prenom ;?></p>
-
-
-</div>
-</div>
-  <br>
   <?php
 
   while($question = $getisquestion->fetch()){

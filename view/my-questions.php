@@ -1,7 +1,6 @@
 
 <?php
 
-
 require_once('../controleur/controleur_question.php');
 $questionC=new question_Control();
 $listequestion=$questionC->afficher_question(); 

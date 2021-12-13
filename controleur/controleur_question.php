@@ -1,10 +1,48 @@
 <?php
+
 require_once('../controleur/securityAction.php');
 require ('../base.php');
 require_once('../modele/modele_answer.php');
 require_once('../modele/modele_question.php');
 class question_Control{
   
+function categorie()
+{
+  $bdd = config::getConnexion();
+
+  $categorie = $bdd->query('SELECT * FROM categorie ORDER BY nom');
+  
+  
+  return $categorie;
+
+}
+
+function nombre_reponse($Variable3,$Var2,$Var3,$rep)
+{ 
+  $bdd = config::getConnexion();
+  while($Variable3==$Var1 && $Var2==1)
+  $rep++;
+  return $rep;
+}
+
+function id_question()
+{
+  $bdd = config::getConnexion();
+  $question_i= $bdd->query('SELECT id_question FROM answers');
+  
+  return $question_i;
+
+}
+
+function question_answer()
+{
+  $bdd = config::getConnexion();
+  $question_i= $bdd->query('SELECT id, id_categorie FROM questions');
+  
+  return $question_i;
+
+}
+
   function publier_question($questionM){
   $sql="INSERT INTO questions(titre, description, contenu,id_auteur,pseudo_auteur,date_publication) 
   VALUES (:titre,:description,:contenu,:id_auteur,:pseudo_auteur,:date_publication)";
@@ -29,7 +67,7 @@ class question_Control{
 function afficher_search_question(){
   $bdd = config::getConnexion();
   //recuperer les questions par defaut sans recherche 
-$getAllQuestions=$bdd->query('SELECT id,id_auteur,titre,description,pseudo_auteur,date_publication FROM questions ORDER BY id DESC');
+$getAllQuestions=$bdd->query('SELECT id,id_auteur,titre,description,pseudo_auteur,date_publication, FROM questions ORDER BY id DESC');
 
 //verifier si une recherche a été rentrée par l'utilisateur
 if(isset($_GET['search']) AND !empty($_GET['search']))
@@ -121,6 +159,15 @@ function signup_recuperer_user($user_pseudo, $user_nom, $user_prenom)
 
 
 }
+
+function show_cat($id){
+  $bdd= config::getConnexion();
+  $check = $bdd->prepare('SELECT * FROM questions WHERE id = ?');
+
+  $check->execute(array($id));
+return $check;
+
+} 
 function show_user($id){
   $bdd= config::getConnexion();
   $checkIfUserExists = $bdd->prepare('SELECT pseudo,nom,prenom FROM users WHERE id = ?');
