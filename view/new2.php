@@ -91,7 +91,7 @@ if(isset($_SESSION['auth']))
 
 
 while($question = $listequestion->fetch()){
-if($question['id_categorie']==1){
+if($question['id_categorie']==3){
   ?>
 
 <div class="card">

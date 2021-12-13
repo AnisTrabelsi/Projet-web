@@ -7,8 +7,8 @@
 		private $id_auteur=null;
         private $pseudo_auteur =null;
 		private $date_publication =null;
-
-		function __construct($titre, $description, $contenu,  $id_auteur,$pseudo_auteur,$date_publication){
+        private $cat =null;
+		function __construct($titre, $description, $contenu,  $id_auteur,$pseudo_auteur,$date_publication,$cat){
 			
 			$this->titre=$titre;
 			$this->description=$description;
@@ -16,6 +16,7 @@
 			$this->id_auteur=$id_auteur;
             $this->pseudo_auteur=$pseudo_auteur;
             $this->date_publication=$date_publication;
+			$this->cat=$cat;
 
 		}
 	
@@ -37,6 +38,12 @@
         function getdate_publication(){
 			return $this->date_publication;
 		}
+
+		function getcat(){
+			return $this->cat;
+		}
+
+
 		function settitre(string $titre){
 			$this->titre=$titre;
 		}
@@ -54,6 +61,9 @@
 		}
         function setdate_publication(string $date_publication){
 			$this->date_publication=$date_publication;
+		}
+		function setcat(string $cat){
+			$this->cat=$cat;
 		}
 		
 		

@@ -17,11 +17,22 @@ function categorie()
 
 }
 
-function nombre_reponse($Variable3,$Var2,$Var3,$rep)
+function nombre_reponse($num)
 { 
   $bdd = config::getConnexion();
-  while($Variable3==$Var1 && $Var2==1)
-  $rep++;
+  
+$rep=0;
+  $tab = $bdd->query('SELECT q.id,q.id_categorie,a.id_question
+FROM questions q
+JOIN answers a ON q.id =  a.id_question ');
+  
+  
+  while($n = $tab->fetch())
+  {
+    if($n['id_categorie'])
+    $rep=$rep+1;
+  }
+  
   return $rep;
 }
 
@@ -67,7 +78,7 @@ function question_answer()
 function afficher_search_question(){
   $bdd = config::getConnexion();
   //recuperer les questions par defaut sans recherche 
-$getAllQuestions=$bdd->query('SELECT id,id_auteur,titre,description,pseudo_auteur,date_publication, FROM questions ORDER BY id DESC');
+$getAllQuestions=$bdd->query('SELECT * FROM questions ORDER BY id DESC');
 
 //verifier si une recherche a été rentrée par l'utilisateur
 if(isset($_GET['search']) AND !empty($_GET['search']))
@@ -75,13 +86,14 @@ if(isset($_GET['search']) AND !empty($_GET['search']))
 //la recherche 
 $usersSearch = $_GET['search'];
 //recuperer toutes les questions qui correspondent à la recherche(en fonction du titre) 
-$getAllQuestions = $bdd->query('SELECT id, id_auteur, titre, description, pseudo_auteur, date_publication FROM questions WHERE titre LIKE "%'.$usersSearch.'%"  ORDER BY id DESC');
+$getAllQuestions = $bdd->query('SELECT * FROM questions WHERE titre LIKE "%'.$usersSearch.'%"  ORDER BY id DESC');
 
 }
 
 return $getAllQuestions;
 
 }
+
 
 function showArticleContentAction($id){
   $bdd = config::getConnexion();
@@ -178,7 +190,7 @@ return $checkIfUserExists;
 } 
 function show_question($id){
   $bdd= config::getConnexion();
-  $getisquestion = $bdd->prepare('SELECT * FROM questions WHERE  id_auteur= ? ORDER BY id DESC ');
+  $getisquestion = $bdd->prepare('SELECT * FROM questions WHERE  id_categorie= ? ORDER BY id DESC ');
 
   $getisquestion->execute(array($id));
 

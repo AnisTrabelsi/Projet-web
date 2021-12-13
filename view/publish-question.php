@@ -1,16 +1,10 @@
 
 
+
 <?php 
 
 require_once('../modele/modele_question.php');
 require_once('../controleur/controleur_question.php');
-
-if(!isset($_SESSION['auth'])){
-
-header('Location:login.php');
-
-}
-
 
 
 
@@ -25,7 +19,7 @@ if(isset($_POST['signup']))
 
 
   //verifier si les champs ne sont pas vides
-if(!empty($_POST['title']) AND !empty($_POST['description']) AND !empty($_POST['content']))
+if(!empty($_POST['title']) AND !empty($_POST['description']) AND !empty($_POST['content']) AND !empty($_POST['cat']))
 {
  //les donnees de la question
 $question_title = $_POST['title'];
@@ -34,13 +28,15 @@ $question_content = $_POST['content'];
 $question_id_author = $_SESSION['id'];
 $question_pseudo_author = $_SESSION['pseudo'];
 $question_date= date('d/m/Y');
+$question_categorie=$_POST['cat'];
+
 
 $questionM =new question_Model($question_title,
 $question_description,
 $question_content,
 $question_id_author,
 $question_pseudo_author,
-$question_date);
+$question_date,$question_categorie);
  
 
 //inserer la question  sur la questionc
@@ -109,7 +105,33 @@ if(isset($successmsg)){
     <textarea class="form-control" name="content" ></textarea>
    
 </div>
+<div>
+<label for="exampleInputEmail1" class="form-label">Categorie de la question</label>
+ <br>
+<div class="form-check form-check-inline">
+  
 
+   
+ 
+  <input class="form-check-input" type="radio" name="cat"  value="1">
+  <label class="form-check-label" for="inlineRadio1">La biomasse</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="cat"  value="2">
+  <label class="form-check-label" for="inlineRadio2">L'eolien</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="cat"  value="3">
+  <label class="form-check-label" for="inlineRadio2">l'hydroelectricite</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="cat"  value="4">
+  <label class="form-check-label" for="inlineRadio2">La geothermie</label>
+</div>
+</div>
+<br><br>
   
 <button type="submit" class="btn btn-primary" name="signup">Publier la question</button>
 

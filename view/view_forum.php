@@ -6,15 +6,18 @@ $questionC= new question_Control();
 
 $question_i=$questionC->id_question();
 $question_ans=$questionC->question_answer();
+
 $variable=$question_ans->fetch();
 $var=$question_i->fetch();
+
 $categorie = $questionC->categorie();
+
 $var1=$variable['id'];
 $var2=$variable['id_categorie'];
 $var3=$var['id_question'];
 ?>
 
-<form  method="Post">
+<table class="table table-striped" method="Post">
   <thead>
     <tr>
       <th scope="col">Numéro</th>
@@ -64,10 +67,10 @@ $var3=$var['id_question'];
 
 <br><br>
  <?php
-
+$n1=1;
  
-$reponse['1']=0;
-$reponse['1']=$questionC->nombre_reponse($var3,$var2,$var1,$reponse['1']);
+
+$reponse['1']=$questionC->nombre_reponse($n1);
 $reponse['2']=0;
 $reponse['3']=0;
 $reponse['4']=0;
@@ -91,7 +94,7 @@ $reponse['4']=0;
          
         case 1:
             ?>
-            <td><a href="newfiel.php<?= $c['id']; ?>">La biomasse</a></td>
+            <td><a href="newfiel.php?id_categorie<?= $c['id']; ?>">La biomasse</a></td>
      
       
        <td><?=$reponse['1']?></td>
@@ -104,7 +107,7 @@ $reponse['4']=0;
 <?php
 case 2:
             ?>
-            <td><a href="newfiel.php?id_categorie=<?= $_SESSION['id']; ?>" >L'éolien</a>
+            <td><a href="new1.php?id_categorie" >L'éolien</a>
 </td>
             <td><?=$reponse['2']?></td>
        <?php
@@ -116,7 +119,7 @@ case 3:
             ?>
 
 <td>  
-  <a href="newfiel.php?id_categorie=<?= $c['id']; ?>">L'hydroélectricité</a>
+  <a href="new2.php?id_categorie">L'hydroélectricité</a>
 </td>
             <td><?=$reponse['3']?></td>
        <?php
@@ -128,7 +131,21 @@ case 4:
             ?>
             
             <td>
-  <a href="newfiel.php?id=<?= $c['id_categorie']; ?>" >La géothernie</a>
+  <a href="new3.php" >La géothernie</a>
+    
+  
+</div></td>
+            <td><?=$reponse['4']?></td>
+       <?php
+       
+       break;
+ ?>
+<?php
+case 5:
+            ?>
+            
+            <td>
+  <a href="accueil.php" >Toutes les questions</a>
     
   
 </div></td>
@@ -152,7 +169,7 @@ case 4:
 
 
   </tbody>
-</form>
+</table>
 
 
 

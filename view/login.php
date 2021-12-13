@@ -30,7 +30,7 @@ if(isset($_POST['signup']))
       $_SESSION['pseudo']=$usersinfos['pseudo'];
     
       //rediriger l'user vers la page d'accueil
-  header('Location: accueil.php');
+  header('Location: view_forum.php');
   
   
   }//4 
