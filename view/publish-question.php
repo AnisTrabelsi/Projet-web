@@ -29,14 +29,16 @@ $question_id_author = $_SESSION['id'];
 $question_pseudo_author = $_SESSION['pseudo'];
 $question_date= date('d/m/Y');
 $question_categorie=$_POST['cat'];
-
+$categorie=0;
+if(strcmp($question_categorie,'op1')==0)
+$categorie=1;
 
 $questionM =new question_Model($question_title,
 $question_description,
 $question_content,
 $question_id_author,
 $question_pseudo_author,
-$question_date,$question_categorie);
+$question_date,$categorie);
  
 
 //inserer la question  sur la questionc
@@ -113,21 +115,21 @@ if(isset($successmsg)){
 
    
  
-  <input class="form-check-input" type="radio" name="cat"  value="1">
+  <input class="form-check-input" type="radio" name="cat"  value="op1">
   <label class="form-check-label" for="inlineRadio1">La biomasse</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat"  value="2">
+  <input class="form-check-input" type="radio" name="cat"  value="op2">
   <label class="form-check-label" for="inlineRadio2">L'eolien</label>
 </div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat"  value="3">
+  <input class="form-check-input" type="radio" name="cat"  value="op3">
   <label class="form-check-label" for="inlineRadio2">l'hydroelectricite</label>
 </div>
 
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="cat"  value="4">
+  <input class="form-check-input" type="radio" name="cat"  value="op4">
   <label class="form-check-label" for="inlineRadio2">La geothermie</label>
 </div>
 </div>
