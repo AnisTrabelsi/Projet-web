@@ -11,7 +11,6 @@ header('Location:afficherListemessages.php');
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +22,7 @@ Eco-life.tn  </title>
   <!-- Favicon -->
   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:230,400,600,700" rel="stylesheet">
   <!-- Icons -->
   <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
   <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
@@ -110,9 +109,9 @@ Eco-life.tn  </title>
           </div>
         </div>
         <!-- Form -->
-        <form class="mt-4 mb-3 d-md-none">
+        <form class="mt-4 mb-3 d-md-none" >
           <div class="input-group input-group-rounded input-group-merge">
-            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+            <input type="number" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span class="fa fa-search"></span>
@@ -121,14 +120,11 @@ Eco-life.tn  </title>
           </div>
         </form>
         <!-- Navigation -->
+        <h6 class="navbar-heading text-muted">  Réclamation</h6>
         <ul class="navbar-nav">
-          <li class="nav-item  active ">
-            <a class="nav-link " href="../index.html">
-              <i class="ni ni-tv-2 text-primary"></i> Dashboard
-            </a>
-          </li>
+
           <li class="nav-item">
-            <a class="nav-link " href="afficherListemessages.php">
+            <a class="nav-link  " href="afficherListemessages.php">
               <i class="ni ni-planet text-blue"></i>Consulter les messages 
             </a>
           </li>
@@ -157,46 +153,38 @@ Eco-life.tn  </title>
               <i class="ni ni-circle-08 text-pink"></i>Tri descendant des réclamations
             </a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="\website\frontoffice\Colo Shop\indextry.html">
-              <i class="ni ni-shop text-green"></i> Ma boutique
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./examples/afficherclaim.php">
-              <i class="ni ni-bell-55 text-green"></i> claims
-            </a>
-          </li>
+          
+       
         </ul>
         <!-- Divider -->
         <hr class="my-3">
         <!-- Heading -->
-        <h6 class="navbar-heading text-muted">Documentation</h6>
+        <h6 class="navbar-heading text-muted">Produits</h6>
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-3">
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-              <i class="ni ni-spaceship"></i> Getting started
+            <a class="nav-link"
+              href="../../../backsarra/view/afficherproduit.php">
+              <i class="ni ni-spaceship"></i> Afficher produits
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-              <i class="ni ni-palette"></i> Foundation
+            <a class="nav-link" href="../../../backsarra/view/ajouterproduit.php">
+              <i class="ni ni-palette"></i> Ajouter produit
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-              <i class="ni ni-ui-04"></i> Components
+            <a class="nav-link" href="../../../backsarra/view/affichercategorie.php">
+              <i class="ni ni-ui-04"></i> Afficher categorie
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../../backsarra/view/ajoutercategorie.php">
+              <i class="ni ni-ui-04"></i> Ajouter categorie
             </a>
           </li>
         </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item active active-pro">
-            <a class="nav-link" href="../examples/upgrade.html">
-              <i class="ni ni-send text-dark"></i> Upgrade to PRO
-            </a>
-          </li>
-        </ul>
+      
       </div>
     </div>
   </nav>

@@ -1,7 +1,6 @@
 <?php
 require '../controller/ReclamC.php';
 session_start();
-$_SESSION['id']='00000000';
 $reclamd=new reclamc();
 $reclams=$reclamd->tri_reclamtion_ascendant($_SESSION['id']);
 
@@ -176,11 +175,13 @@ $supprimer=array("supprimer","delete");
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html"><?php echo $HOME[$langue]; ?></a></li>
-                            <li><a href="./shop-grid.html"><?php echo $PRODUITS[$langue]; ?></a></li>
-                            <li><a href="#"><?php echo $Services[$langue]; ?></a>
+                            <li><a href="../../../page_accueil/index - Copie.html"><?php echo $HOME[$langue]; ?></a></li>
+                            <li><a href="../../../backsarra/view/afficherproduit.php"><?php echo $PRODUITS[$langue]; ?></a></li>
+                            <li><a href="../../../testmalek/malek/shop-grid.php"><?php echo $Services[$langue]; ?></a>
                             </li>
-                            <li class="active"><a href=""><?php echo $Reclamation[$langue]; ?></a></li>
+                            <li class="active"><a href="./afficherListeReclams.php"><?php echo $Reclamation[$langue]; ?></a></li>
+                            <li class=""><a href="">Forum</a></li>
+
                         </ul>
                     </nav>
                 </div>
@@ -200,56 +201,7 @@ $supprimer=array("supprimer","delete");
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span><?php echo $PRODUITS[$langue]; ?></span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                <?php echo $allcatego[$langue]; ?>
-                                 <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="<?php echo $whatdoyou[$langue]; ?>">
-                                <button type="submit" class="site-btn"><?php echo $serachi[$langue]; ?></button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+216 27 938 360</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->

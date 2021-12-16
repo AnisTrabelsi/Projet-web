@@ -135,7 +135,8 @@ $supprimer=array("supprimer","delete");
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
+   <!-- Header Section Begin -->
+   <header class="header">
         <div class="header__top">
             <div class="container">
                 <div class="row">
@@ -180,11 +181,13 @@ $supprimer=array("supprimer","delete");
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html"><?php echo $HOME[$langue]; ?></a></li>
-                            <li><a href="./shop-grid.html"><?php echo $PRODUITS[$langue]; ?></a></li>
-                            <li><a href="#"><?php echo $Services[$langue]; ?></a>
+                            <li><a href="../../../page_accueil/index - Copie.html"><?php echo $HOME[$langue]; ?></a></li>
+                            <li><a href="../../../backsarra/view/afficherproduit.php"><?php echo $PRODUITS[$langue]; ?></a></li>
+                            <li><a href="../../../testmalek/malek/shop-grid.php"><?php echo $Services[$langue]; ?></a>
                             </li>
-                            <li class="active"><a href=""><?php echo $Reclamation[$langue]; ?></a></li>
+                            <li class="active"><a href="./afficherListeReclams.php"><?php echo $Reclamation[$langue]; ?></a></li>
+                            <li class=""><a href="">Forum</a></li>
+
                         </ul>
                     </nav>
                 </div>
@@ -204,56 +207,7 @@ $supprimer=array("supprimer","delete");
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span><?php echo $PRODUITS[$langue]; ?></span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                <?php echo $allcatego[$langue]; ?>
-                                 <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="<?php echo $whatdoyou[$langue]; ?>">
-                                <button type="submit" class="site-btn"><?php echo $serachi[$langue]; ?></button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+216 27 938 360</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -422,31 +376,27 @@ $supprimer=array("supprimer","delete");
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="id_sujet" id="id_sujet">
+                                                    <label for="id_sujet" id="id_sujet">choisissez l'id produit:
                                                     </label>
-                                                    <select name="id_sujet"><br>
-                                                        <option selected value="VIDE">choisissez l'id produit</option>
-                                                        <option value="001">Panneaux solaires</option>
-                                                        <option value="002">Helices</option>
-                                                        <option value="003">Moteur</option>
-
-                                                    </select>
+                                                    <input type="text" id="id_sujet" class="form-control form-control-alternative" name="id_sujet" required minlenght="3" <?php if (!empty($_GET["IDproduit"])) {
+                                                                                                                                                                                $id = $_GET["IDproduit"];
+                                                                                                                                                                            } else {
+                                                                                                                                                                                $id = "vide";
+                                                                                                                                                                            }  ?> Value="<?php echo ($id) ?>" maxlength="50" size="10" >
 
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="id_sujet2" id="id_sujet2">
+                                                    <label for="id_sujet2" id="id_sujet2">choisissez l'id service:
             </label>
-            <select name=" id_sujet2">
-                                                        <option selected value="VIDE">choisissez l'id service
-                                                        </option>
-                                                        <option value="112">Réparation</option>
-                                                        <option value="111">Installation</option>
-                                                        <option value="110">Maintenance</option>
+            <input type="text" id="id_sujet2" class="form-control form-control-alternative"  <?php if (!empty($_GET["IDservice"])) {
+                                                                                                                                                                       $id = $_GET["IDservice"];
+                                                                                                                                                                  } else {
+                                                                                                                                                                                $id = "vide";
+                                                                                                                                                              }  ?> Value="<?php echo ($id) ?>" name="id_sujet2" required minlenght="3"  maxlength="50" size="10" >
 
-                                                        </select>
                                                 </div>
                                             </div>
 

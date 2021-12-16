@@ -21,14 +21,10 @@ function verif() {
   var nom=document.getElementById("Nom").value;
   var prenom=document.getElementById("Prenom").value;
   var email=document.getElementById("Email").value;
-  var id=document.getElementById("CIN").value;
   var Num=document.getElementById("Num_tel").value;
 
 
-if (id.length!=8){
-document.getElementById("msgDiv14").innerHTML = "Le CIN doit etre de longueur 8 ";
-return false;
- }
+
   if (allLetter(nom) === false) {
   document.getElementById("msgDiv1").innerHTML = "Le nom doit etre en lettres ";
 return false;
